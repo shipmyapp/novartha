@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Financial Calculators | Novartha Capital</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+/* ── TOKENS (match main site exactly) ── */
+:root{
+  --linen:    #F9F4EA;
+  --ivory:    #FDF9F2;
+  --paper:    #F3EDE0;
+  --paper2:   #EDE5D4;
+  --white:    #FFFFFF;
+  --ink:      #1A2318;
+  --ink2:     #2C3A28;
+  --muted:    #6B7A63;
+  --light-muted:#A4B09A;
+  --forest:   #1C3A2A;
+  --green2:   #2B5240;
+  --green3:   #3A6E54;
+  --sage:     #6B9E7E;
+  --mint:     #B8D4C2;
+  --brass:    #A86728;
+  --gold:     #C4924A;
+  --gold2:    #D7B56D;
+  --gold3:    #E8CFA0;
+  --gold4:    #F4E8D0;
+  --border:   rgba(168,103,40,0.15);
+  --border2:  rgba(168,103,40,0.28);
+  --border3:  rgba(28,58,42,0.12);
+  --shadow-sm:0 2px 12px rgba(26,35,24,0.06);
+  --shadow-md:0 8px 32px rgba(26,35,24,0.1);
+  --shadow-lg:0 20px 64px rgba(26,35,24,0.14);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--ivory);color:var(--ink);overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;}
+a{text-decoration:none;color:inherit;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--paper);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 6%;
+  background:rgba(253,249,242,0.96);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  box-shadow:var(--shadow-sm);
+}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo img{height:38px;width:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border2);}
+.nav-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;color:var(--forest);}
+.nav-brand-tag{display:block;font-family:'Jost',sans-serif;font-size:0.54rem;color:var(--muted);letter-spacing:2.5px;text-transform:uppercase;margin-top:2px;}
+.nav-right{display:flex;align-items:center;gap:14px;}
+.nav-back{
+  display:inline-flex;align-items:center;gap:7px;
+  color:var(--muted);font-size:0.845rem;font-weight:500;
+  transition:color 0.2s;
+}
+.nav-back:hover{color:var(--brass);}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+.btn-nav-wa{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#25D366;color:var(--white);
+  font-size:0.82rem;font-weight:600;
+  padding:8px 16px;border-radius:4px;
+  transition:opacity 0.2s;
+}
+.btn-nav-wa:hover{opacity:0.9;}
+.btn-nav-wa svg{width:14px;height:14px;fill:white;}
+
+/* ── PAGE HERO ── */
+.calc-hero{
+  background:var(--forest);
+  padding:100px 6% 60px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.calc-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 0%, rgba(215,181,109,0.1), transparent 70%);
+}
+.calc-hero::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--brass),var(--gold2),var(--brass));
+}
+.calc-hero-inner{position:relative;z-index:1;max-width:700px;margin:0 auto;}
+.calc-hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:0.7rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:18px;
+}
+.calc-hero-eyebrow::before{content:'';width:20px;height:1.5px;background:var(--gold2);}
+.calc-hero h1{
+  font-size:clamp(2rem,4vw,3rem);color:var(--white);
+  font-weight:600;line-height:1.18;margin-bottom:14px;
+}
+.calc-hero h1 em{color:var(--gold2);font-style:italic;}
+.calc-hero p{color:rgba(255,255,255,0.55);line-height:1.78;font-size:0.96rem;margin-bottom:0;}
+
+/* ── GOAL TABS ── */
+.goal-tabs-wrap{
+  background:var(--paper);
+  border-bottom:1px solid var(--border);
+  padding:20px 6%;
+  position:sticky;top:68px;z-index:800;
+}
+.goal-tabs{
+  max-width:1000px;margin:0 auto;
+  display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
+}
+.gtab{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:9px 18px;border-radius:40px;
+  background:var(--white);border:1.5px solid var(--border);
+  color:var(--ink2);font-size:0.83rem;font-weight:500;
+  cursor:pointer;font-family:'Jost',sans-serif;
+  transition:all 0.22s;white-space:nowrap;
+}
+.gtab:hover{border-color:var(--brass);color:var(--brass);background:rgba(168,103,40,0.04);}
+.gtab.active{background:var(--forest);border-color:var(--forest);color:var(--white);}
+.gtab-icon{font-size:1rem;}
+
+/* ── CALC SECTION ── */
+.calc-section{padding:48px 6% 80px;}
+.calc-panel{display:none;max-width:960px;margin:0 auto;}
+.calc-panel.active{display:block;}
+
+/* ── CALC CARD ── */
+.calc-card{
+  background:var(--white);border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow-md);border:1px solid var(--border);
+}
+.calc-header{
+  background:var(--forest);
+  padding:36px 44px;
+  display:flex;justify-content:space-between;align-items:flex-start;
+  flex-wrap:wrap;gap:20px;
+  border-bottom:3px solid var(--brass);
+}
+.ch-left{}
+.ch-eyebrow{
+  font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--gold2);margin-bottom:10px;
+  display:flex;align-items:center;gap:8px;
+}
+.ch-eyebrow::before{content:'';width:14px;height:1px;background:var(--gold2);}
+.ch-left h2{
+  font-size:1.8rem;color:var(--white);font-weight:600;line-height:1.25;margin-bottom:8px;
+}
+.ch-left h2 em{color:var(--gold2);font-style:italic;}
+.ch-left p{color:rgba(255,255,255,0.5);font-size:0.875rem;line-height:1.65;max-width:360px;}
+/* Result box */
+.calc-result-box{
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(215,181,109,0.25);
+  border-radius:12px;padding:22px 28px;
+  text-align:center;min-width:200px;flex-shrink:0;
+}
+.crb-label{
+  font-size:0.65rem;letter-spacing:2px;text-transform:uppercase;
+  color:rgba(255,255,255,0.45);margin-bottom:8px;
+}
+.crb-amount{
+  font-family:'Cormorant Garamond',serif;
+  font-size:2.2rem;font-weight:600;
+  color:var(--gold2);line-height:1;
+}
+.crb-sub{font-size:0.72rem;color:rgba(255,255,255,0.35);margin-top:6px;}
+
+/* ── SLIDERS BODY ── */
+.calc-body{padding:36px 44px;}
+
+.slider-group{margin-bottom:28px;}
+.slider-row{
+  display:flex;justify-content:space-between;
+  align-items:baseline;margin-bottom:10px;
+}
+.slider-label{font-size:0.875rem;font-weight:500;color:var(--ink2);}
+.slider-val{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.45rem;font-weight:600;color:var(--forest);
+  background:var(--paper);border:1px solid var(--border);
+  border-radius:5px;padding:3px 14px;min-width:100px;text-align:center;
+}
+
+/* Range input — consistent cross-browser */
+input[type=range]{
+  -webkit-appearance:none;appearance:none;
+  width:100%;height:5px;border-radius:3px;
+  outline:none;cursor:pointer;
+  background:linear-gradient(to right, var(--green3) var(--pct,0%), var(--paper2) var(--pct,0%));
+  margin-bottom:7px;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;
+  width:22px;height:22px;border-radius:50%;
+  background:var(--white);
+  border:2.5px solid var(--forest);
+  box-shadow:0 2px 8px rgba(28,58,42,0.2);
+  cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;
+}
+input[type=range]:hover::-webkit-slider-thumb{transform:scale(1.15);box-shadow:0 4px 14px rgba(28,58,42,0.28);}
+input[type=range]::-moz-range-thumb{
+  width:22px;height:22px;border-radius:50%;
+  background:var(--white);border:2.5px solid var(--forest);cursor:pointer;
+}
+input[type=range]::-moz-range-progress{background:var(--green3);height:5px;border-radius:3px;}
+input[type=range]::-moz-range-track{background:var(--paper2);height:5px;border-radius:3px;}
+
+.slider-minmax{display:flex;justify-content:space-between;font-size:0.7rem;color:var(--light-muted);}
+
+/* ── BREAKDOWN ── */
+.calc-breakdown{
+  background:var(--linen);border:1px solid var(--border);
+  border-radius:10px;padding:24px 28px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:18px;
+  margin-top:28px;
+}
+.bd-item{text-align:center;}
+.bd-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.55rem;color:var(--forest);font-weight:600;
+}
+.bd-label{font-size:0.73rem;color:var(--muted);margin-top:4px;}
+.bd-sub{font-size:0.67rem;color:var(--sage);margin-top:2px;}
+
+/* ── CTA INSIDE CALC ── */
+.calc-cta{
+  background:var(--forest);
+  border-radius:10px;padding:28px 32px;margin-top:24px;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.calc-cta-text strong{
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem;color:var(--white);display:block;margin-bottom:5px;
+}
+.calc-cta-text p{color:rgba(255,255,255,0.55);font-size:0.86rem;max-width:380px;line-height:1.6;}
+.btn-cta-wa{
+  display:inline-flex;align-items:center;gap:9px;
+  background:#25D366;color:var(--white);
+  font-family:'Jost',sans-serif;font-weight:600;font-size:0.875rem;
+  padding:12px 22px;border-radius:6px;white-space:nowrap;
+  box-shadow:0 4px 18px rgba(37,211,102,0.28);
+  transition:transform 0.2s,box-shadow 0.2s;
+}
+.btn-cta-wa:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(37,211,102,0.36);}
+.btn-cta-wa svg{width:17px;height:17px;fill:white;}
+
+/* Divider */
+.calc-sep{height:1px;background:var(--border);margin:28px 0;}
+
+/* ── STICKY WA ── */
+.sticky-wa{
+  position:fixed;bottom:26px;right:26px;z-index:700;
+  width:54px;height:54px;border-radius:50%;background:#25D366;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 6px 26px rgba(37,211,102,0.4);transition:transform 0.2s;
+}
+.sticky-wa:hover{transform:scale(1.1);}
+.sticky-wa svg{width:25px;height:25px;fill:white;}
+.wa-ring{position:absolute;inset:-5px;border-radius:50%;border:2px solid rgba(37,211,102,0.3);animation:waring 2.5s infinite;}
+@keyframes waring{0%,100%{transform:scale(1);opacity:0.7}50%{transform:scale(1.22);opacity:0}}
+
+/* ── FOOTER ── */
+.page-footer{
+  background:var(--forest);padding:28px 6%;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  border-top:3px solid var(--brass);
+}
+.page-footer p{color:rgba(255,255,255,0.35);font-size:0.76rem;}
+.page-footer a{color:var(--gold2);font-size:0.83rem;font-weight:500;transition:opacity 0.2s;}
+.page-footer a:hover{opacity:0.8;}
+
+/* ── RESPONSIVE ── */
+@media(max-width:700px){
+  .calc-header,.calc-body{padding:24px 22px;}
+  .calc-result-box{min-width:unset;width:100%;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="novartha-capital.html" class="nav-logo">
+    <img src="/mnt/user-data/uploads/3ac15283-17d5-4ccd-b9dd-ab06c51ec646.png" alt="Novartha Capital"/>
+    <div>
+      <div class="nav-brand-name">Novartha Capital</div>
+      <span class="nav-brand-tag">Financial Calculators</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a href="novartha-capital.html" class="nav-back">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Home
+    </a>
+    <a href="https://wa.me/919979232324?text=Hi%2C%20I%20used%20the%20calculator%20and%20want%20to%20speak%20to%20an%20advisor" target="_blank" class="btn-nav-wa">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+      Talk to Advisor
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="calc-hero">
+  <div class="calc-hero-inner">
+    <div class="calc-hero-eyebrow">Free Financial Tools</div>
+    <h1>Plan Your Future with<br/><em>Smart Calculators</em></h1>
+    <p>Interactive goal-based calculators using real compound interest formulae. Discover exactly how much to invest today — so you can live every dream tomorrow.</p>
+  </div>
+</div>
+
+<!-- STICKY TABS -->
+<div class="goal-tabs-wrap">
+  <div class="goal-tabs">
+    <button class="gtab active"   onclick="switchCalc('sip',this)">          <span class="gtab-icon">📈</span> SIP Calculator</button>
+    <button class="gtab"          onclick="switchCalc('child-education',this)"><span class="gtab-icon">🎓</span> Child Education</button>
+    <button class="gtab"          onclick="switchCalc('child-wedding',this)">  <span class="gtab-icon">💍</span> Child Wedding</button>
+    <button class="gtab"          onclick="switchCalc('dream-home',this)">     <span class="gtab-icon">🏡</span> Dream Home</button>
+    <button class="gtab"          onclick="switchCalc('dream-car',this)">      <span class="gtab-icon">🚗</span> Dream Car</button>
+    <button class="gtab"          onclick="switchCalc('dream-vacation',this)"> <span class="gtab-icon">✈️</span> Dream Vacation</button>
+    <button class="gtab"          onclick="switchCalc('retirement',this)">     <span class="gtab-icon">🌅</span> Retirement</button>
+  </div>
+</div>
+
+<!-- CALCULATOR PANELS -->
+<div class="calc-section">
+
+  <!-- ═══════ SIP CALCULATOR ═══════ -->
+  <div class="calc-panel active" id="calc-sip">
+    <div class="calc-card">
+      <div class="calc-header">
+        <div class="ch-left">
+          <div class="ch-eyebrow">Wealth Builder</div>
+          <h2>📈 SIP <em>Calculator</em></h2>
+          <p>Discover the power of compounding. See how your monthly SIP grows into a life-changing corpus over time.</p>
+        </div>
+        <div class="calc-result-box">
+          <div class="crb-label">Estimated Corpus</div>
+          <div class="crb-amount" id="sip-result">₹0</div>
+          <div class="crb-sub">at end of investment</div>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Monthly SIP Amount</span><span class="slider-val" id="sip-amount-val">₹5,000</span></div>
+          <input type="range" id="sip-amount" min="500" max="200000" step="500" value="5000" oninput="calcSIP()"/>
+          <div class="slider-minmax"><span>₹500</span><span>₹2,00,000</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Investment Duration</span><span class="slider-val" id="sip-years-val">10 Yrs</span></div>
+          <input type="range" id="sip-years" min="1" max="40" step="1" value="10" oninput="calcSIP()"/>
+          <div class="slider-minmax"><span>1 Year</span><span>40 Years</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Expected Annual Return</span><span class="slider-val" id="sip-rate-val">12%</span></div>
+          <input type="range" id="sip-rate" min="4" max="24" step="0.5" value="12" oninput="calcSIP()"/>
+          <div class="slider-minmax"><span>4% (Conservative)</span><span>24% (Aggressive)</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Annual Step-Up in SIP</span><span class="slider-val" id="sip-stepup-val">0%</span></div>
+          <input type="range" id="sip-stepup" min="0" max="25" step="1" value="0" oninput="calcSIP()"/>
+          <div class="slider-minmax"><span>0% (No step-up)</span><span>25% per year</span></div>
+        </div>
+        <div class="calc-breakdown" id="sip-breakdown"></div>
+        <div class="calc-cta">
+          <div class="calc-cta-text">
+            <strong>Want a personalised SIP plan?</strong>
+            <p>Ankit &amp; Arpita Mehta will design the perfect SIP strategy for your goals — free, no obligation.</p>
+          </div>
+          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20used%20the%20SIP%20calculator%20and%20want%20a%20personalised%20plan" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Get My Free SIP Plan</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ CHILD EDUCATION ═══════ -->
+  <div class="calc-panel" id="calc-child-education">
+    <div class="calc-card">
+      <div class="calc-header">
+        <div class="ch-left">
+          <div class="ch-eyebrow">Goal Planner</div>
+          <h2>🎓 Child <em>Education Planner</em></h2>
+          <p>Plan today for your child's college or professional degree. Never let fees come between your child and their dreams.</p>
+        </div>
+        <div class="calc-result-box">
+          <div class="crb-label">Monthly SIP Required</div>
+          <div class="crb-amount" id="edu-result">₹0</div>
+          <div class="crb-sub">to reach your target</div>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Child's Current Age</span><span class="slider-val" id="edu-age-val">5 Yrs</span></div>
+          <input type="range" id="edu-age" min="0" max="17" step="1" value="5" oninput="calcEdu()"/>
+          <div class="slider-minmax"><span>0 (Newborn)</span><span>17 Years</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Age When Education Starts</span><span class="slider-val" id="edu-start-val">18 Yrs</span></div>
+          <input type="range" id="edu-start" min="5" max="25" step="1" value="18" oninput="calcEdu()"/>
+          <div class="slider-minmax"><span>5 Years</span><span>25 Years</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Current Cost of Education</span><span class="slider-val" id="edu-cost-val">₹20L</span></div>
+          <input type="range" id="edu-cost" min="200000" max="10000000" step="100000" value="2000000" oninput="calcEdu()"/>
+          <div class="slider-minmax"><span>₹2 Lakh</span><span>₹1 Crore</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Education Inflation Rate</span><span class="slider-val" id="edu-inflation-val">10%</span></div>
+          <input type="range" id="edu-inflation" min="4" max="15" step="0.5" value="10" oninput="calcEdu()"/>
+          <div class="slider-minmax"><span>4%</span><span>15%</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Expected Investment Return</span><span class="slider-val" id="edu-return-val">12%</span></div>
+          <input type="range" id="edu-return" min="6" max="20" step="0.5" value="12" oninput="calcEdu()"/>
+          <div class="slider-minmax"><span>6%</span><span>20%</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Existing Savings for This Goal</span><span class="slider-val" id="edu-existing-val">₹0</span></div>
+          <input type="range" id="edu-existing" min="0" max="5000000" step="10000" value="0" oninput="calcEdu()"/>
+          <div class="slider-minmax"><span>₹0</span><span>₹50 Lakh</span></div>
+        </div>
+        <div class="calc-breakdown" id="edu-breakdown"></div>
+        <div class="calc-cta">
+          <div class="calc-cta-text"><strong>Secure Your Child's Dreams</strong><p>Let Arpita Mehta create a personalised child education plan — free, no obligation.</p></div>
+          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20plan%20for%20my%20child%27s%20education" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan Child's Education</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ CHILD WEDDING ═══════ -->
+  <div class="calc-panel" id="calc-child-wedding">
+    <div class="calc-card">
+      <div class="calc-header">
+        <div class="ch-left">
+          <div class="ch-eyebrow">Goal Planner</div>
+          <h2>💍 Child <em>Wedding Planner</em></h2>
+          <p>Give your child a celebration to remember — without loans, without stress, planned systematically from today.</p>
+        </div>
+        <div class="calc-result-box">
+          <div class="crb-label">Monthly SIP Required</div>
+          <div class="crb-amount" id="wed-result">₹0</div>
+          <div class="crb-sub">to fund the wedding</div>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Child's Current Age</span><span class="slider-val" id="wed-age-val">5 Yrs</span></div>
+          <input type="range" id="wed-age" min="0" max="20" step="1" value="5" oninput="calcWed()"/>
+          <div class="slider-minmax"><span>0 (Newborn)</span><span>20 Years</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Expected Age at Wedding</span><span class="slider-val" id="wed-marrage-val">27 Yrs</span></div>
+          <input type="range" id="wed-marrage" min="18" max="35" step="1" value="27" oninput="calcWed()"/>
+          <div class="slider-minmax"><span>18 Years</span><span>35 Years</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Wedding Budget (Today's Value)</span><span class="slider-val" id="wed-cost-val">₹20L</span></div>
+          <input type="range" id="wed-cost" min="500000" max="50000000" step="100000" value="2000000" oninput="calcWed()"/>
+          <div class="slider-minmax"><span>₹5 Lakh</span><span>₹5 Crore</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Inflation Rate</span><span class="slider-val" id="wed-inflation-val">7%</span></div>
+          <input type="range" id="wed-inflation" min="4" max="15" step="0.5" value="7" oninput="calcWed()"/>
+          <div class="slider-minmax"><span>4%</span><span>15%</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Expected Investment Return</span><span class="slider-val" id="wed-return-val">12%</span></div>
+          <input type="range" id="wed-return" min="6" max="20" step="0.5" value="12" oninput="calcWed()"/>
+          <div class="slider-minmax"><span>6%</span><span>20%</span></div>
+        </div>
+        <div class="calc-breakdown" id="wed-breakdown"></div>
+        <div class="calc-cta">
+          <div class="calc-cta-text"><strong>Plan Your Child's Big Day</strong><p>Ankit Mehta will help you build a dedicated wedding fund — starting small, growing big.</p></div>
+          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20plan%20for%20my%20child%27s%20wedding" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan Wedding Fund</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ DREAM HOME ═══════ -->
+  <div class="calc-panel" id="calc-dream-home">
+    <div class="calc-card">
+      <div class="calc-header">
+        <div class="ch-left">
+          <div class="ch-eyebrow">Goal Planner</div>
+          <h2>🏡 Dream <em>Home Planner</em></h2>
+          <p>Build your down payment corpus the smart way — without straining monthly cash flow or taking extra risk.</p>
+        </div>
+        <div class="calc-result-box">
+          <div class="crb-label">Monthly SIP Required</div>
+          <div class="crb-amount" id="home-result">₹0</div>
+          <div class="crb-sub">for down payment goal</div>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Home Value Today</span><span class="slider-val" id="home-value-val">₹50L</span></div>
+          <input type="range" id="home-value" min="1000000" max="100000000" step="500000" value="5000000" oninput="calcHome()"/>
+          <div class="slider-minmax"><span>₹10 Lakh</span><span>₹10 Crore</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Down Payment % Required</span><span class="slider-val" id="home-down-val">20%</span></div>
+          <input type="range" id="home-down" min="10" max="100" step="5" value="20" oninput="calcHome()"/>
+          <div class="slider-minmax"><span>10%</span><span>100% (Full amount)</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Years to Buy Home</span><span class="slider-val" id="home-years-val">5 Yrs</span></div>
+          <input type="range" id="home-years" min="1" max="20" step="1" value="5" oninput="calcHome()"/>
+          <div class="slider-minmax"><span>1 Year</span><span>20 Years</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Real Estate Appreciation Rate</span><span class="slider-val" id="home-appre-val">7%</span></div>
+          <input type="range" id="home-appre" min="0" max="15" step="0.5" value="7" oninput="calcHome()"/>
+          <div class="slider-minmax"><span>0% (No change)</span><span>15% (High growth area)</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Expected Investment Return</span><span class="slider-val" id="home-return-val">12%</span></div>
+          <input type="range" id="home-return" min="6" max="20" step="0.5" value="12" oninput="calcHome()"/>
+          <div class="slider-minmax"><span>6%</span><span>20%</span></div>
+        </div>
+        <div class="calc-breakdown" id="home-breakdown"></div>
+        <div class="calc-cta">
+          <div class="calc-cta-text"><strong>Plan Your Dream Home</strong><p>Get a personalised home purchase plan from Ankit Mehta — free, zero pressure.</p></div>
+          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20plan%20for%20my%20dream%20home" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan My Dream Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ DREAM CAR ═══════ -->
+  <div class="calc-panel" id="calc-dream-car">
+    <div class="calc-card">
+      <div class="calc-header">
+        <div class="ch-left">
+          <div class="ch-eyebrow">Goal Planner</div>
+          <h2>🚗 Dream <em>Car Planner</em></h2>
+          <p>Drive your dream car debt-free. Build a dedicated corpus — zero EMI, zero interest paid to banks.</p>
+        </div>
+        <div class="calc-result-box">
+          <div class="crb-label">Monthly SIP Required</div>
+          <div class="crb-amount" id="car-result">₹0</div>
+          <div class="crb-sub">to buy debt-free</div>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Car Value Today (On-Road)</span><span class="slider-val" id="car-value-val">₹15L</span></div>
+          <input type="range" id="car-value" min="300000" max="20000000" step="100000" value="1500000" oninput="calcCar()"/>
+          <div class="slider-minmax"><span>₹3 Lakh</span><span>₹2 Crore</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Years to Buy</span><span class="slider-val" id="car-years-val">3 Yrs</span></div>
+          <input type="range" id="car-years" min="1" max="15" step="1" value="3" oninput="calcCar()"/>
+          <div class="slider-minmax"><span>1 Year</span><span>15 Years</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Car Price Inflation</span><span class="slider-val" id="car-inflation-val">5%</span></div>
+          <input type="range" id="car-inflation" min="0" max="12" step="0.5" value="5" oninput="calcCar()"/>
+          <div class="slider-minmax"><span>0%</span><span>12%</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Expected Investment Return</span><span class="slider-val" id="car-return-val">10%</span></div>
+          <input type="range" id="car-return" min="6" max="20" step="0.5" value="10" oninput="calcCar()"/>
+          <div class="slider-minmax"><span>6%</span><span>20%</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">% of Car Cost to Save</span><span class="slider-val" id="car-pct-val">100%</span></div>
+          <input type="range" id="car-pct" min="10" max="100" step="5" value="100" oninput="calcCar()"/>
+          <div class="slider-minmax"><span>10%</span><span>100% (Full amount)</span></div>
+        </div>
+        <div class="calc-breakdown" id="car-breakdown"></div>
+        <div class="calc-cta">
+          <div class="calc-cta-text"><strong>Drive Your Dream — Debt Free</strong><p>Let Ankit help you plan a dedicated car fund. You focus on driving, we handle the investing.</p></div>
+          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20save%20for%20my%20dream%20car" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan My Dream Car</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ DREAM VACATION ═══════ -->
+  <div class="calc-panel" id="calc-dream-vacation">
+    <div class="calc-card">
+      <div class="calc-header">
+        <div class="ch-left">
+          <div class="ch-eyebrow">Goal Planner</div>
+          <h2>✈️ Dream <em>Vacation Planner</em></h2>
+          <p>Europe, Maldives, world cruise — invest for your experiences too, not just your financial obligations.</p>
+        </div>
+        <div class="calc-result-box">
+          <div class="crb-label">Monthly SIP Required</div>
+          <div class="crb-amount" id="vac-result">₹0</div>
+          <div class="crb-sub">to fund your vacation</div>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Vacation Budget (Today's Estimate)</span><span class="slider-val" id="vac-cost-val">₹3L</span></div>
+          <input type="range" id="vac-cost" min="50000" max="10000000" step="25000" value="300000" oninput="calcVac()"/>
+          <div class="slider-minmax"><span>₹50,000</span><span>₹1 Crore</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Years Until Vacation</span><span class="slider-val" id="vac-years-val">3 Yrs</span></div>
+          <input type="range" id="vac-years" min="1" max="10" step="1" value="3" oninput="calcVac()"/>
+          <div class="slider-minmax"><span>1 Year</span><span>10 Years</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Travel Inflation Rate</span><span class="slider-val" id="vac-inflation-val">6%</span></div>
+          <input type="range" id="vac-inflation" min="2" max="15" step="0.5" value="6" oninput="calcVac()"/>
+          <div class="slider-minmax"><span>2%</span><span>15%</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Expected Investment Return</span><span class="slider-val" id="vac-return-val">10%</span></div>
+          <input type="range" id="vac-return" min="6" max="20" step="0.5" value="10" oninput="calcVac()"/>
+          <div class="slider-minmax"><span>6%</span><span>20%</span></div>
+        </div>
+        <div class="calc-breakdown" id="vac-breakdown"></div>
+        <div class="calc-cta">
+          <div class="calc-cta-text"><strong>Travel the World — Guilt Free</strong><p>Arpita will build you a dedicated travel fund alongside your main investment portfolio.</p></div>
+          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20plan%20a%20vacation%20fund" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan Vacation Fund</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ RETIREMENT ═══════ -->
+  <div class="calc-panel" id="calc-retirement">
+    <div class="calc-card">
+      <div class="calc-header">
+        <div class="ch-left">
+          <div class="ch-eyebrow">Freedom Planner</div>
+          <h2>🌅 Retirement <em>Planner</em></h2>
+          <p>Know your freedom number. Calculate exactly how much to invest so you retire on your own terms.</p>
+        </div>
+        <div class="calc-result-box">
+          <div class="crb-label">Monthly SIP Required</div>
+          <div class="crb-amount" id="ret-result">₹0</div>
+          <div class="crb-sub">to retire comfortably</div>
+        </div>
+      </div>
+      <div class="calc-body">
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Your Current Age</span><span class="slider-val" id="ret-age-val">30 Yrs</span></div>
+          <input type="range" id="ret-age" min="20" max="60" step="1" value="30" oninput="calcRet()"/>
+          <div class="slider-minmax"><span>20 Years</span><span>60 Years</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Target Retirement Age</span><span class="slider-val" id="ret-retage-val">60 Yrs</span></div>
+          <input type="range" id="ret-retage" min="40" max="70" step="1" value="60" oninput="calcRet()"/>
+          <div class="slider-minmax"><span>40 Years</span><span>70 Years</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Life Expectancy</span><span class="slider-val" id="ret-life-val">85 Yrs</span></div>
+          <input type="range" id="ret-life" min="70" max="100" step="1" value="85" oninput="calcRet()"/>
+          <div class="slider-minmax"><span>70 Years</span><span>100 Years</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Current Monthly Expenses</span><span class="slider-val" id="ret-expenses-val">₹50,000</span></div>
+          <input type="range" id="ret-expenses" min="10000" max="500000" step="5000" value="50000" oninput="calcRet()"/>
+          <div class="slider-minmax"><span>₹10,000</span><span>₹5,00,000</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Inflation Rate</span><span class="slider-val" id="ret-inflation-val">6%</span></div>
+          <input type="range" id="ret-inflation" min="3" max="12" step="0.5" value="6" oninput="calcRet()"/>
+          <div class="slider-minmax"><span>3%</span><span>12%</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Pre-Retirement Investment Return</span><span class="slider-val" id="ret-return-val">12%</span></div>
+          <input type="range" id="ret-return" min="6" max="20" step="0.5" value="12" oninput="calcRet()"/>
+          <div class="slider-minmax"><span>6%</span><span>20%</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Post-Retirement Return on Corpus</span><span class="slider-val" id="ret-post-val">7%</span></div>
+          <input type="range" id="ret-post" min="4" max="12" step="0.5" value="7" oninput="calcRet()"/>
+          <div class="slider-minmax"><span>4% (Conservative)</span><span>12%</span></div>
+        </div>
+        <div class="slider-group">
+          <div class="slider-row"><span class="slider-label">Existing Retirement Savings</span><span class="slider-val" id="ret-existing-val">₹0</span></div>
+          <input type="range" id="ret-existing" min="0" max="20000000" step="50000" value="0" oninput="calcRet()"/>
+          <div class="slider-minmax"><span>₹0</span><span>₹2 Crore</span></div>
+        </div>
+        <div class="calc-breakdown" id="ret-breakdown"></div>
+        <div class="calc-cta">
+          <div class="calc-cta-text"><strong>Know Your Retirement Number</strong><p>Let Ankit &amp; Arpita build a complete retirement roadmap for your lifestyle and goals.</p></div>
+          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20plan%20for%20retirement%20with%20Novartha%20Capital" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan My Retirement</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end calc-section -->
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <p>© 2024 Novartha Capital. AMFI Registered. Investments subject to market risks.</p>
+  <a href="novartha-capital.html">← Return to Main Website</a>
+</div>
+
+<!-- STICKY WA -->
+<a href="https://wa.me/919979232324?text=Hi%2C%20I%20used%20the%20calculator%20and%20want%20to%20speak%20to%20an%20advisor" target="_blank" class="sticky-wa">
+  <div class="wa-ring"></div>
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+</a>
+
+<script>
+/* ── UTILS ── */
+const WA = '919979232324';
+function fmt(n){
+  if(n>=10000000) return '₹'+(n/10000000).toFixed(2)+' Cr';
+  if(n>=100000)   return '₹'+(n/100000).toFixed(2)+' L';
+  if(n>=1000)     return '₹'+(n/1000).toFixed(1)+' K';
+  return '₹'+Math.round(n).toLocaleString('en-IN');
+}
+function setPct(el){
+  const min=+el.min, max=+el.max, val=+el.value;
+  const p=((val-min)/(max-min)*100).toFixed(1);
+  el.style.setProperty('--pct', p+'%');
+}
+function bd(items){
+  return items.map(i=>`
+    <div class="bd-item">
+      <div class="bd-num">${i.val}</div>
+      <div class="bd-label">${i.label}</div>
+      ${i.sub?`<div class="bd-sub">${i.sub}</div>`:''}
+    </div>`).join('');
+}
+
+/* ── FINANCE MATHS ── */
+function sipFV(monthly, rateAnnual, years, stepupPct){
+  const r=rateAnnual/12/100, su=stepupPct/100;
+  if(su===0) return monthly*((Math.pow(1+r,years*12)-1)/r)*(1+r);
+  let total=0, sip=monthly;
+  for(let y=0;y<years;y++){
+    total = total*Math.pow(1+r,12) + sip*((Math.pow(1+r,12)-1)/r)*(1+r);
+    sip *= (1+su);
+  }
+  return total;
+}
+function reqSIP(target, rateAnnual, months){
+  const r=rateAnnual/12/100;
+  if(r<=0||months<=0) return target/Math.max(months,1);
+  return target*r/((Math.pow(1+r,months)-1)*(1+r));
+}
+function lumpFV(pv, rateAnnual, years){
+  return pv*Math.pow(1+rateAnnual/100, years);
+}
+
+/* ── SIP ── */
+function calcSIP(){
+  const amt=+document.getElementById('sip-amount').value;
+  const yrs=+document.getElementById('sip-years').value;
+  const rate=+document.getElementById('sip-rate').value;
+  const su=+document.getElementById('sip-stepup').value;
+  document.getElementById('sip-amount-val').textContent = '₹'+amt.toLocaleString('en-IN');
+  document.getElementById('sip-years-val').textContent  = yrs+' Yrs';
+  document.getElementById('sip-rate-val').textContent   = rate+'%';
+  document.getElementById('sip-stepup-val').textContent = su+'%';
+  ['sip-amount','sip-years','sip-rate','sip-stepup'].forEach(id=>setPct(document.getElementById(id)));
+  const fv=sipFV(amt,rate,yrs,su);
+  const invested=amt*12*yrs;
+  const gains=Math.max(fv-invested,0);
+  document.getElementById('sip-result').textContent=fmt(fv);
+  document.getElementById('sip-breakdown').innerHTML=bd([
+    {val:fmt(invested), label:'Total Invested',    sub:'Your capital'},
+    {val:fmt(gains),    label:'Wealth Gained',     sub:'Power of compounding'},
+    {val:fmt(fv),       label:'Maturity Value',    sub:'Your corpus'},
+    {val:(gains/Math.max(invested,1)*100).toFixed(0)+'%', label:'Return on Investment'},
+  ]);
+}
+
+/* ── EDUCATION ── */
+function calcEdu(){
+  const age=+document.getElementById('edu-age').value;
+  const startAge=+document.getElementById('edu-start').value;
+  const cost=+document.getElementById('edu-cost').value;
+  const infl=+document.getElementById('edu-inflation').value;
+  const ret=+document.getElementById('edu-return').value;
+  const existing=+document.getElementById('edu-existing').value;
+  document.getElementById('edu-age-val').textContent      = age+' Yrs';
+  document.getElementById('edu-start-val').textContent    = startAge+' Yrs';
+  document.getElementById('edu-cost-val').textContent     = fmt(cost);
+  document.getElementById('edu-inflation-val').textContent= infl+'%';
+  document.getElementById('edu-return-val').textContent   = ret+'%';
+  document.getElementById('edu-existing-val').textContent = fmt(existing);
+  ['edu-age','edu-start','edu-cost','edu-inflation','edu-return','edu-existing'].forEach(id=>setPct(document.getElementById(id)));
+  const years=Math.max(startAge-age,1);
+  const futureCost=lumpFV(cost,infl,years);
+  const existingGrown=lumpFV(existing,ret,years);
+  const target=Math.max(futureCost-existingGrown,0);
+  const sip=reqSIP(target,ret,years*12);
+  document.getElementById('edu-result').textContent=fmt(Math.max(sip,0));
+  document.getElementById('edu-breakdown').innerHTML=bd([
+    {val:fmt(futureCost),      label:'Future Cost of Education',   sub:`In ${years} yrs @ ${infl}% inflation`},
+    {val:fmt(existingGrown),   label:'Existing Savings Grown',     sub:'Your head start'},
+    {val:fmt(target),          label:'Gap to Fill',                sub:'Corpus still needed'},
+    {val:years+' Yrs',         label:'Time to Goal'},
+  ]);
+}
+
+/* ── WEDDING ── */
+function calcWed(){
+  const age=+document.getElementById('wed-age').value;
+  const marAge=+document.getElementById('wed-marrage').value;
+  const cost=+document.getElementById('wed-cost').value;
+  const infl=+document.getElementById('wed-inflation').value;
+  const ret=+document.getElementById('wed-return').value;
+  document.getElementById('wed-age-val').textContent     = age+' Yrs';
+  document.getElementById('wed-marrage-val').textContent = marAge+' Yrs';
+  document.getElementById('wed-cost-val').textContent    = fmt(cost);
+  document.getElementById('wed-inflation-val').textContent= infl+'%';
+  document.getElementById('wed-return-val').textContent  = ret+'%';
+  ['wed-age','wed-marrage','wed-cost','wed-inflation','wed-return'].forEach(id=>setPct(document.getElementById(id)));
+  const years=Math.max(marAge-age,1);
+  const futureCost=lumpFV(cost,infl,years);
+  const sip=reqSIP(futureCost,ret,years*12);
+  document.getElementById('wed-result').textContent=fmt(Math.max(sip,0));
+  document.getElementById('wed-breakdown').innerHTML=bd([
+    {val:fmt(futureCost),              label:'Future Wedding Cost',      sub:`At ${infl}% inflation`},
+    {val:fmt(sip*12*years),            label:'Total You Will Invest',    sub:'Your contribution'},
+    {val:fmt(Math.max(futureCost-sip*12*years,0)), label:'Gains from Returns', sub:'Markets do the heavy lifting'},
+    {val:years+' Yrs',                 label:'Years to Plan'},
+  ]);
+}
+
+/* ── HOME ── */
+function calcHome(){
+  const val=+document.getElementById('home-value').value;
+  const down=+document.getElementById('home-down').value;
+  const years=+document.getElementById('home-years').value;
+  const appre=+document.getElementById('home-appre').value;
+  const ret=+document.getElementById('home-return').value;
+  document.getElementById('home-value-val').textContent = fmt(val);
+  document.getElementById('home-down-val').textContent  = down+'%';
+  document.getElementById('home-years-val').textContent = years+' Yrs';
+  document.getElementById('home-appre-val').textContent = appre+'%';
+  document.getElementById('home-return-val').textContent= ret+'%';
+  ['home-value','home-down','home-years','home-appre','home-return'].forEach(id=>setPct(document.getElementById(id)));
+  const futureHomeVal=lumpFV(val,appre,years);
+  const downAmt=futureHomeVal*down/100;
+  const sip=reqSIP(downAmt,ret,years*12);
+  document.getElementById('home-result').textContent=fmt(Math.max(sip,0));
+  document.getElementById('home-breakdown').innerHTML=bd([
+    {val:fmt(futureHomeVal),           label:'Future Home Value',        sub:`At ${appre}% appreciation`},
+    {val:fmt(downAmt),                 label:'Down Payment Needed',      sub:`${down}% of future value`},
+    {val:fmt(sip*12*years),            label:'Total You Will Invest'},
+    {val:fmt(Math.max(downAmt-sip*12*years,0)), label:'Returns from Investing',  sub:'Compounding works for you'},
+  ]);
+}
+
+/* ── CAR ── */
+function calcCar(){
+  const val=+document.getElementById('car-value').value;
+  const years=+document.getElementById('car-years').value;
+  const infl=+document.getElementById('car-inflation').value;
+  const ret=+document.getElementById('car-return').value;
+  const cpct=+document.getElementById('car-pct').value;
+  document.getElementById('car-value-val').textContent    = fmt(val);
+  document.getElementById('car-years-val').textContent    = years+' Yrs';
+  document.getElementById('car-inflation-val').textContent= infl+'%';
+  document.getElementById('car-return-val').textContent   = ret+'%';
+  document.getElementById('car-pct-val').textContent      = cpct+'%';
+  ['car-value','car-years','car-inflation','car-return','car-pct'].forEach(id=>setPct(document.getElementById(id)));
+  const futureVal=lumpFV(val,infl,years)*cpct/100;
+  const sip=reqSIP(futureVal,ret,years*12);
+  document.getElementById('car-result').textContent=fmt(Math.max(sip,0));
+  document.getElementById('car-breakdown').innerHTML=bd([
+    {val:fmt(lumpFV(val,infl,years)),  label:'Future Car Price',         sub:`At ${infl}% inflation`},
+    {val:fmt(futureVal),               label:'Your Savings Target',      sub:`${cpct}% of future price`},
+    {val:fmt(sip*12*years),            label:'Total You Will Invest'},
+    {val:fmt(Math.max(futureVal-sip*12*years,0)), label:'Returns from Investing', sub:'Beat the loan interest'},
+  ]);
+}
+
+/* ── VACATION ── */
+function calcVac(){
+  const cost=+document.getElementById('vac-cost').value;
+  const years=+document.getElementById('vac-years').value;
+  const infl=+document.getElementById('vac-inflation').value;
+  const ret=+document.getElementById('vac-return').value;
+  document.getElementById('vac-cost-val').textContent     = fmt(cost);
+  document.getElementById('vac-years-val').textContent    = years+' Yrs';
+  document.getElementById('vac-inflation-val').textContent= infl+'%';
+  document.getElementById('vac-return-val').textContent   = ret+'%';
+  ['vac-cost','vac-years','vac-inflation','vac-return'].forEach(id=>setPct(document.getElementById(id)));
+  const futureCost=lumpFV(cost,infl,years);
+  const sip=reqSIP(futureCost,ret,years*12);
+  document.getElementById('vac-result').textContent=fmt(Math.max(sip,0));
+  document.getElementById('vac-breakdown').innerHTML=bd([
+    {val:fmt(futureCost),              label:'Future Vacation Cost',     sub:`At ${infl}% travel inflation`},
+    {val:fmt(sip*12*years),            label:'Total You Will Invest'},
+    {val:fmt(Math.max(futureCost-sip*12*years,0)), label:'Investment Gains',   sub:'Markets fund your holiday'},
+    {val:years+' Yr'+(years>1?'s':''), label:'Time to Save',            sub:'Start early, invest less'},
+  ]);
+}
+
+/* ── RETIREMENT ── */
+function calcRet(){
+  const age=+document.getElementById('ret-age').value;
+  const retAge=+document.getElementById('ret-retage').value;
+  const lifeExp=+document.getElementById('ret-life').value;
+  const expenses=+document.getElementById('ret-expenses').value;
+  const infl=+document.getElementById('ret-inflation').value;
+  const ret=+document.getElementById('ret-return').value;
+  const postRet=+document.getElementById('ret-post').value;
+  const existing=+document.getElementById('ret-existing').value;
+  document.getElementById('ret-age-val').textContent     = age+' Yrs';
+  document.getElementById('ret-retage-val').textContent  = retAge+' Yrs';
+  document.getElementById('ret-life-val').textContent    = lifeExp+' Yrs';
+  document.getElementById('ret-expenses-val').textContent= fmt(expenses);
+  document.getElementById('ret-inflation-val').textContent= infl+'%';
+  document.getElementById('ret-return-val').textContent  = ret+'%';
+  document.getElementById('ret-post-val').textContent    = postRet+'%';
+  document.getElementById('ret-existing-val').textContent= fmt(existing);
+  ['ret-age','ret-retage','ret-life','ret-expenses','ret-inflation','ret-return','ret-post','ret-existing'].forEach(id=>setPct(document.getElementById(id)));
+  const yearsToRetire=Math.max(retAge-age,1);
+  const retYears=Math.max(lifeExp-retAge,1);
+  const monthlyAtRetire=expenses*Math.pow(1+infl/100,yearsToRetire);
+  const realRate=(postRet-infl)/100/12;
+  let corpusNeeded;
+  if(realRate<=0) corpusNeeded=monthlyAtRetire*retYears*12;
+  else corpusNeeded=monthlyAtRetire*(1-Math.pow(1+realRate,-retYears*12))/realRate;
+  const existingGrown=lumpFV(existing,ret,yearsToRetire);
+  const target=Math.max(corpusNeeded-existingGrown,0);
+  const sip=reqSIP(target,ret,yearsToRetire*12);
+  document.getElementById('ret-result').textContent=fmt(Math.max(sip,0));
+  document.getElementById('ret-breakdown').innerHTML=bd([
+    {val:fmt(corpusNeeded),    label:'Your Freedom Number',      sub:'Corpus needed at retirement'},
+    {val:fmt(monthlyAtRetire), label:'Monthly Expense at Retirement', sub:`Inflation-adjusted to age ${retAge}`},
+    {val:fmt(existingGrown),   label:'Existing Savings Grown',   sub:'Your head start'},
+    {val:yearsToRetire+' Yrs', label:'Years to Build Corpus',   sub:'Time is your biggest asset'},
+  ]);
+}
+
+/* ── SWITCH CALC ── */
+function switchCalc(id, btn){
+  document.querySelectorAll('.calc-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.gtab').forEach(b=>b.classList.remove('active'));
+  const panel=document.getElementById('calc-'+id);
+  if(panel) panel.classList.add('active');
+  if(btn) btn.classList.add('active');
+  window.scrollTo({top: document.querySelector('.goal-tabs-wrap').offsetTop - 10, behavior:'smooth'});
+}
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded',()=>{
+  calcSIP(); calcEdu(); calcWed(); calcHome(); calcCar(); calcVac(); calcRet();
+  document.querySelectorAll('input[type=range]').forEach(setPct);
+  // Handle URL hash
+  const hash = location.hash.replace('#','');
+  if(hash){
+    const btn = Array.from(document.querySelectorAll('.gtab')).find(b=>{
+      const attr = b.getAttribute('onclick')||'';
+      return attr.includes("'"+hash+"'") || attr.includes('"'+hash+'"');
+    });
+    if(btn) btn.click();
+  }
+});
+</script>
+</body>
+</html>
