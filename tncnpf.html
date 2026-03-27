@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Terms, Privacy & Disclaimer | Novartha Capital</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --linen:#F9F4EA; --ivory:#FDF9F2; --paper:#F3EDE0; --white:#fff;
+  --ink:#1A2318; --ink2:#2C3A28; --muted:#6B7A63; --light-muted:#A4B09A;
+  --forest:#1C3A2A; --green2:#2B5240; --green3:#3A6E54; --sage:#6B9E7E;
+  --brass:#A86728; --gold:#C4924A; --gold2:#D7B56D; --gold3:#E8CFA0; --gold4:#F4E8D0;
+  --border:rgba(168,103,40,0.15); --border2:rgba(168,103,40,0.28); --border3:rgba(28,58,42,0.12);
+  --shadow-sm:0 2px 12px rgba(26,35,24,0.06); --shadow-md:0 8px 32px rgba(26,35,24,0.1);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--ivory);color:var(--ink);overflow-x:hidden;}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',serif;}
+a{text-decoration:none;color:inherit;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--paper);}
+::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px;}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;height:68px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 6%;
+  background:rgba(253,249,242,0.96);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);box-shadow:var(--shadow-sm);
+}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+.nav-logo img{height:38px;width:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border2);}
+.nav-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;color:var(--forest);}
+.nav-brand-tag{display:block;font-size:0.54rem;color:var(--muted);letter-spacing:2.5px;text-transform:uppercase;margin-top:2px;font-family:'Jost',sans-serif;}
+.nav-right{display:flex;align-items:center;gap:14px;}
+.nav-back{display:inline-flex;align-items:center;gap:7px;color:var(--muted);font-size:0.845rem;font-weight:500;transition:color 0.2s;}
+.nav-back:hover{color:var(--brass);}
+.nav-back svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;}
+
+/* PAGE HERO */
+.page-hero{
+  background:var(--forest);padding:96px 6% 56px;
+  position:relative;overflow:hidden;
+}
+.page-hero::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--brass),var(--gold2),var(--brass));}
+.page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 80% 50%,rgba(215,181,109,0.07),transparent 70%);}
+.page-hero-inner{position:relative;z-index:1;max-width:860px;}
+.ph-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:0.7rem;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold2);margin-bottom:16px;}
+.ph-eyebrow::before{content:'';width:20px;height:1.5px;background:var(--gold2);}
+.page-hero h1{font-size:clamp(2rem,4vw,2.8rem);color:var(--white);font-weight:600;line-height:1.18;margin-bottom:12px;}
+.page-hero h1 em{color:var(--gold2);font-style:italic;}
+.page-hero p{color:rgba(255,255,255,0.5);font-size:0.94rem;line-height:1.7;}
+
+/* TAB NAV */
+.doc-tabs{
+  background:var(--paper);border-bottom:1px solid var(--border);
+  padding:0 6%;position:sticky;top:68px;z-index:800;
+  display:flex;gap:0;
+}
+.doc-tab{
+  padding:16px 24px;font-family:'Jost',sans-serif;font-size:0.875rem;font-weight:500;
+  color:var(--muted);cursor:pointer;border-bottom:2.5px solid transparent;
+  transition:color 0.2s,border-color 0.2s;background:none;border-top:none;border-left:none;border-right:none;
+  white-space:nowrap;
+}
+.doc-tab:hover{color:var(--brass);}
+.doc-tab.active{color:var(--forest);border-bottom-color:var(--brass);font-weight:600;}
+
+/* CONTENT LAYOUT */
+.doc-body{max-width:860px;margin:0 auto;padding:60px 6% 80px;}
+
+/* SECTIONS */
+.doc-section{display:none;animation:fadeIn 0.3s ease;}
+.doc-section.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* DOCUMENT STYLES */
+.doc-meta{
+  display:flex;gap:24px;flex-wrap:wrap;align-items:center;
+  margin-bottom:40px;padding-bottom:28px;border-bottom:1px solid var(--border);
+}
+.doc-meta-badge{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--paper);border:1px solid var(--border2);
+  color:var(--brass);font-size:0.75rem;font-weight:600;letter-spacing:0.5px;
+  padding:6px 14px;border-radius:40px;
+}
+.doc-meta-date{font-size:0.8rem;color:var(--muted);}
+
+.doc-h1{font-size:clamp(1.8rem,3vw,2.4rem);color:var(--ink);font-weight:600;margin-bottom:8px;line-height:1.2;}
+.doc-h1 em{color:var(--brass);font-style:italic;}
+.doc-lead{font-size:1.05rem;color:var(--muted);line-height:1.75;margin-bottom:32px;border-left:3px solid var(--gold3);padding-left:18px;}
+
+.doc-toc{
+  background:var(--linen);border:1px solid var(--border3);border-radius:10px;
+  padding:24px 28px;margin-bottom:40px;
+}
+.doc-toc h4{font-size:0.8rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-family:'Jost',sans-serif;font-weight:600;margin-bottom:14px;}
+.doc-toc ol{list-style:none;display:flex;flex-direction:column;gap:8px;padding:0;}
+.doc-toc ol li a{font-size:0.88rem;color:var(--green3);font-weight:500;transition:color 0.2s;}
+.doc-toc ol li a:hover{color:var(--brass);}
+.doc-toc ol li span{font-size:0.78rem;color:var(--light-muted);margin-right:10px;}
+
+.clause{margin-bottom:36px;}
+.clause-num{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:0.68rem;letter-spacing:2.5px;text-transform:uppercase;
+  color:var(--brass);margin-bottom:10px;font-family:'Jost',sans-serif;font-weight:700;
+}
+.clause-num::before{content:'';width:16px;height:1.5px;background:var(--brass);}
+.clause h3{font-size:1.3rem;color:var(--ink);margin-bottom:12px;font-weight:600;}
+.clause p{font-size:0.92rem;color:var(--muted);line-height:1.8;margin-bottom:12px;}
+.clause ul,.clause ol{padding-left:20px;display:flex;flex-direction:column;gap:8px;margin-bottom:12px;}
+.clause li{font-size:0.9rem;color:var(--muted);line-height:1.7;}
+.clause li strong{color:var(--ink2);font-weight:600;}
+.clause-box{
+  background:var(--paper);border-left:3px solid var(--brass);
+  border-radius:0 8px 8px 0;padding:16px 20px;margin-top:14px;
+}
+.clause-box p{margin:0;font-size:0.875rem;color:var(--ink2);font-style:italic;}
+
+.section-rule{height:1px;background:var(--border);margin:40px 0;}
+
+/* DISCLAIMER BLOCK */
+.disclaimer-block{
+  background:var(--forest);border-radius:14px;padding:40px 44px;
+  position:relative;overflow:hidden;margin-bottom:40px;
+}
+.disclaimer-block::before{content:'';position:absolute;top:-40px;right:-40px;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(215,181,109,0.1),transparent);}
+.disclaimer-block h3{font-size:1.5rem;color:var(--white);margin-bottom:16px;}
+.disclaimer-block h3 em{color:var(--gold2);font-style:italic;}
+.disclaimer-block p{color:rgba(255,255,255,0.6);font-size:0.9rem;line-height:1.8;margin-bottom:12px;}
+.disclaimer-block p:last-child{margin-bottom:0;}
+.disclaimer-block strong{color:var(--gold3);}
+
+/* IMPORTANT BOX */
+.important-box{
+  background:rgba(168,103,40,0.07);border:1.5px solid var(--border2);
+  border-radius:10px;padding:20px 24px;margin:20px 0;
+  display:flex;gap:14px;align-items:flex-start;
+}
+.ib-icon{font-size:1.3rem;flex-shrink:0;margin-top:2px;}
+.ib-text{font-size:0.88rem;color:var(--ink2);line-height:1.7;}
+.ib-text strong{color:var(--brass);display:block;margin-bottom:4px;}
+
+/* CONTACT CARD */
+.contact-card{
+  background:var(--linen);border:1px solid var(--border);
+  border-radius:12px;padding:28px 32px;margin-top:32px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;
+}
+.contact-card p{font-size:0.9rem;color:var(--muted);line-height:1.6;}
+.contact-card strong{color:var(--ink);display:block;margin-bottom:4px;font-size:1rem;}
+.btn-wa-small{
+  display:inline-flex;align-items:center;gap:9px;
+  background:#25D366;color:var(--white);
+  font-family:'Jost',sans-serif;font-weight:600;font-size:0.875rem;
+  padding:11px 22px;border-radius:6px;white-space:nowrap;
+  transition:opacity 0.2s;
+}
+.btn-wa-small:hover{opacity:0.9;}
+.btn-wa-small svg{width:16px;height:16px;fill:white;}
+
+/* FOOTER */
+.page-footer{
+  background:var(--forest);padding:28px 6%;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;
+  border-top:3px solid var(--brass);
+}
+.page-footer p{color:rgba(255,255,255,0.35);font-size:0.76rem;}
+.page-footer a{color:var(--gold2);font-size:0.83rem;font-weight:500;transition:opacity 0.2s;}
+.page-footer a:hover{opacity:0.8;}
+
+@media(max-width:768px){
+  .doc-body{padding:40px 5% 60px;}
+  .disclaimer-block{padding:28px 24px;}
+  .doc-tabs{gap:0;overflow-x:auto;}
+  .doc-tab{padding:14px 16px;font-size:0.82rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://novarthacapital.com/" class="nav-logo">
+    <img src="/novarthalogo.png" alt="Novartha Capital"/>
+    <div>
+      <div class="nav-brand-name">Novartha Capital</div>
+      <span class="nav-brand-tag">Legal Documents</span>
+    </div>
+  </a>
+  <div class="nav-right">
+    <a href="https://novarthacapital.com/" class="nav-back">
+      <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Home
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="ph-eyebrow">Legal Documents</div>
+    <h1>Terms, Privacy &amp; <em>Disclaimer</em></h1>
+    <p>Please read these documents carefully before using our website or engaging with our services. These policies govern your use of Novartha Capital's platform and communications.</p>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="doc-tabs">
+  <button class="doc-tab active" onclick="showDoc('terms',this)">Terms &amp; Conditions</button>
+  <button class="doc-tab" onclick="showDoc('privacy',this)">Privacy Policy</button>
+  <button class="doc-tab" onclick="showDoc('disclaimer',this)">Disclaimer</button>
+</div>
+
+<!-- ════════════════════════════════════════
+     TERMS & CONDITIONS
+════════════════════════════════════════ -->
+<div class="doc-body">
+<div class="doc-section active" id="doc-terms">
+
+  <div class="doc-meta">
+    <span class="doc-meta-badge">📄 Terms &amp; Conditions</span>
+    <span class="doc-meta-date">Last Updated: March 2025 · Effective Immediately</span>
+  </div>
+
+  <h1 class="doc-h1">Terms &amp; <em>Conditions</em></h1>
+  <p class="doc-lead">These Terms and Conditions govern your access to and use of the Novartha Capital website, communications, and services. By accessing this website or engaging with our services, you agree to be bound by these terms.</p>
+
+  <div class="doc-toc">
+    <h4>Table of Contents</h4>
+    <ol>
+      <li><span>01.</span><a href="#t1">About Novartha Capital</a></li>
+      <li><span>02.</span><a href="#t2">Acceptance of Terms</a></li>
+      <li><span>03.</span><a href="#t3">Nature of Services</a></li>
+      <li><span>04.</span><a href="#t4">Use of Website &amp; Content</a></li>
+      <li><span>05.</span><a href="#t5">Calculators &amp; Tools</a></li>
+      <li><span>06.</span><a href="#t6">User Responsibilities</a></li>
+      <li><span>07.</span><a href="#t7">Intellectual Property</a></li>
+      <li><span>08.</span><a href="#t8">Limitation of Liability</a></li>
+      <li><span>09.</span><a href="#t9">Third-Party Links</a></li>
+      <li><span>10.</span><a href="#t10">Governing Law</a></li>
+      <li><span>11.</span><a href="#t11">Amendments</a></li>
+      <li><span>12.</span><a href="#t12">Contact</a></li>
+    </ol>
+  </div>
+
+  <div class="clause" id="t1">
+    <div class="clause-num">01</div>
+    <h3>About Novartha Capital</h3>
+    <p>Novartha Capital is a mutual fund distribution firm operated by Ankit Mehta and Arpita Mehta, registered with the Association of Mutual Funds in India (AMFI) as a Mutual Fund Distributor. We provide financial education, goal-based planning guidance, and mutual fund distribution services to individuals and families.</p>
+    <p>Novartha Capital is <strong>not a SEBI Registered Investment Advisor (RIA)</strong>. The services and content provided by us constitute distribution and financial education, not personalised investment advice as defined under SEBI regulations.</p>
+    <div class="clause-box"><p>"AMFI Registration is held as Mutual Fund Distributor only. Novartha Capital does not hold SEBI RIA registration and does not provide SEBI-regulated investment advisory services."</p></div>
+  </div>
+
+  <div class="clause" id="t2">
+    <div class="clause-num">02</div>
+    <h3>Acceptance of Terms</h3>
+    <p>By visiting this website, downloading our resources, using our calculators, filling in our forms, or communicating with us via WhatsApp or any other channel, you confirm that you:</p>
+    <ul>
+      <li>Have read, understood, and agree to be bound by these Terms and Conditions.</li>
+      <li>Are at least 18 years of age and legally capable of entering into binding agreements.</li>
+      <li>Understand and accept the nature and limitations of our services as described herein.</li>
+    </ul>
+    <p>If you do not agree with any part of these terms, please discontinue use of the website immediately.</p>
+  </div>
+
+  <div class="clause" id="t3">
+    <div class="clause-num">03</div>
+    <h3>Nature of Services</h3>
+    <p>Novartha Capital provides the following services:</p>
+    <ul>
+      <li><strong>Mutual Fund Distribution:</strong> We facilitate the purchase of mutual fund schemes through AMFI-registered distribution channels. We may earn distributor commissions from Asset Management Companies (AMCs).</li>
+      <li><strong>Financial Education:</strong> We provide educational content, guides, and resources to help individuals understand personal finance and investing.</li>
+      <li><strong>Goal-Based Planning Guidance:</strong> We offer informal guidance to help clients map financial goals to appropriate investment strategies.</li>
+      <li><strong>Financial Calculators:</strong> We offer interactive tools for illustrative purposes to help users understand potential investment outcomes.</li>
+    </ul>
+    <div class="important-box">
+      <span class="ib-icon">⚠️</span>
+      <div class="ib-text"><strong>Important Notice</strong>All content, guidance, and communications from Novartha Capital are for informational and educational purposes only and do not constitute personalised investment advice under SEBI regulations. Investors should consult a qualified SEBI Registered Investment Advisor before making investment decisions.</div>
+    </div>
+  </div>
+
+  <div class="clause" id="t4">
+    <div class="clause-num">04</div>
+    <h3>Use of Website &amp; Content</h3>
+    <p>You may access and use this website for personal, non-commercial purposes, subject to these terms. You agree not to:</p>
+    <ul>
+      <li>Copy, reproduce, distribute, or commercially exploit any content from this website without prior written consent.</li>
+      <li>Use the website in any manner that could damage, disable, or impair its functionality.</li>
+      <li>Attempt to gain unauthorised access to any part of the website or its underlying systems.</li>
+      <li>Use automated tools, scrapers, or bots to extract data from the website.</li>
+      <li>Represent Novartha Capital's content as your own or misuse our brand identity.</li>
+    </ul>
+  </div>
+
+  <div class="clause" id="t5">
+    <div class="clause-num">05</div>
+    <h3>Calculators &amp; Financial Tools</h3>
+    <p>The financial calculators available on this website are provided solely for <strong>illustrative and educational purposes</strong>. They use simplified mathematical assumptions and do not account for all variables that may affect actual investment outcomes.</p>
+    <ul>
+      <li>Results from calculators are projections only and are not guarantees of future performance.</li>
+      <li>Actual returns may be significantly higher or lower than illustrated figures.</li>
+      <li>Calculators do not account for taxation, exit loads, expense ratios, or market volatility unless explicitly stated.</li>
+      <li>Users should not make investment decisions based solely on calculator results.</li>
+    </ul>
+    <div class="clause-box"><p>"Mutual fund investments are subject to market risks. Past performance is not indicative of future results. Calculator projections are illustrative only."</p></div>
+  </div>
+
+  <div class="clause" id="t6">
+    <div class="clause-num">06</div>
+    <h3>User Responsibilities</h3>
+    <p>As a user of this website and our services, you are responsible for:</p>
+    <ul>
+      <li>Providing accurate and truthful information when completing forms or communicating with us.</li>
+      <li>Conducting your own due diligence before making any investment decisions.</li>
+      <li>Ensuring that any investment you make is suitable for your personal financial situation, risk tolerance, and investment horizon.</li>
+      <li>Keeping your personal and financial information secure when communicating with us.</li>
+      <li>Complying with all applicable laws and regulations in your jurisdiction.</li>
+    </ul>
+  </div>
+
+  <div class="clause" id="t7">
+    <div class="clause-num">07</div>
+    <h3>Intellectual Property</h3>
+    <p>All content on this website — including text, graphics, logos, the Novartha Capital brand name, financial guides, calculator designs, and page layouts — is the intellectual property of Novartha Capital and is protected by applicable Indian and international copyright laws.</p>
+    <p>You may not reproduce, republish, modify, or distribute any content from this website for commercial purposes without our express written permission.</p>
+  </div>
+
+  <div class="clause" id="t8">
+    <div class="clause-num">08</div>
+    <h3>Limitation of Liability</h3>
+    <p>To the maximum extent permitted by applicable law, Novartha Capital, its principals, employees, and associates shall not be liable for:</p>
+    <ul>
+      <li>Any financial loss arising from investment decisions made based on content, guidance, or tools provided on this website.</li>
+      <li>Any direct, indirect, incidental, or consequential losses arising from use of or inability to use this website.</li>
+      <li>Errors, inaccuracies, or omissions in any content on this website.</li>
+      <li>Technical interruptions, downtime, or data loss affecting the website or its tools.</li>
+    </ul>
+    <p>Your use of this website and engagement with our services is entirely at your own risk.</p>
+  </div>
+
+  <div class="clause" id="t9">
+    <div class="clause-num">09</div>
+    <h3>Third-Party Links &amp; Services</h3>
+    <p>This website may contain links to third-party websites, platforms, or services (such as mutual fund portals, AMC websites, or regulatory resources). These links are provided for convenience only. Novartha Capital does not control, endorse, or assume any responsibility for the content, accuracy, or practices of any third-party website.</p>
+  </div>
+
+  <div class="clause" id="t10">
+    <div class="clause-num">10</div>
+    <h3>Governing Law &amp; Jurisdiction</h3>
+    <p>These Terms and Conditions shall be governed by and construed in accordance with the laws of India. Any disputes arising from these terms or your use of our services shall be subject to the exclusive jurisdiction of the courts located in Ahmedabad, Gujarat, India.</p>
+  </div>
+
+  <div class="clause" id="t11">
+    <div class="clause-num">11</div>
+    <h3>Amendments</h3>
+    <p>Novartha Capital reserves the right to modify, update, or revise these Terms and Conditions at any time without prior notice. The most current version will always be available on this page, with the effective date updated accordingly. Your continued use of the website following any changes constitutes your acceptance of the revised terms.</p>
+  </div>
+
+  <div class="clause" id="t12">
+    <div class="clause-num">12</div>
+    <h3>Contact Us</h3>
+    <p>If you have any questions, concerns, or queries regarding these Terms and Conditions, please reach out to us:</p>
+    <div class="contact-card">
+      <div>
+        <strong>Novartha Capital</strong>
+        <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="472e292128072928312635332f262426372e33262b6924282a">[email&#160;protected]</a><br/>AMFI Registered Mutual Fund Distributor<br/>Gujarat, India</p>
+      </div>
+      <a href="https://wa.me/919979232324?text=Hi%2C%20I%20have%20a%20question%20regarding%20your%20Terms%20and%20Conditions" target="_blank" class="btn-wa-small">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+
+</div><!-- end terms -->
+
+<!-- ════════════════════════════════════════
+     PRIVACY POLICY
+════════════════════════════════════════ -->
+<div class="doc-section" id="doc-privacy">
+
+  <div class="doc-meta">
+    <span class="doc-meta-badge">🔒 Privacy Policy</span>
+    <span class="doc-meta-date">Last Updated: March 2025 · Effective Immediately</span>
+  </div>
+
+  <h1 class="doc-h1">Privacy <em>Policy</em></h1>
+  <p class="doc-lead">At Novartha Capital, we respect your privacy and are committed to protecting your personal information. This policy explains what data we collect, how we use it, and your rights over your information.</p>
+
+  <div class="doc-toc">
+    <h4>Table of Contents</h4>
+    <ol>
+      <li><span>01.</span><a href="#p1">Information We Collect</a></li>
+      <li><span>02.</span><a href="#p2">How We Use Your Information</a></li>
+      <li><span>03.</span><a href="#p3">WhatsApp Communication</a></li>
+      <li><span>04.</span><a href="#p4">Sharing of Information</a></li>
+      <li><span>05.</span><a href="#p5">Data Storage &amp; Security</a></li>
+      <li><span>06.</span><a href="#p6">Cookies &amp; Website Analytics</a></li>
+      <li><span>07.</span><a href="#p7">Your Rights</a></li>
+      <li><span>08.</span><a href="#p8">Children's Privacy</a></li>
+      <li><span>09.</span><a href="#p9">Changes to This Policy</a></li>
+      <li><span>10.</span><a href="#p10">Contact Us</a></li>
+    </ol>
+  </div>
+
+  <div class="clause" id="p1">
+    <div class="clause-num">01</div>
+    <h3>Information We Collect</h3>
+    <p>We collect information that you voluntarily provide to us when you:</p>
+    <ul>
+      <li><strong>Download our free guide:</strong> We collect your name and WhatsApp number via our lead magnet form.</li>
+      <li><strong>Contact us via WhatsApp:</strong> We receive your WhatsApp number and the content of your messages.</li>
+      <li><strong>Use our calculators:</strong> Calculator inputs are processed entirely in your browser. We do not store or transmit calculator data to our servers.</li>
+      <li><strong>Communicate via email:</strong> We collect your email address and correspondence content.</li>
+    </ul>
+    <p>We do not collect sensitive financial data, bank account details, or investment portfolio information through this website.</p>
+  </div>
+
+  <div class="clause" id="p2">
+    <div class="clause-num">02</div>
+    <h3>How We Use Your Information</h3>
+    <p>The information we collect is used solely for the following purposes:</p>
+    <ul>
+      <li><strong>Service Delivery:</strong> To send you requested resources (such as our free investment guide) and to respond to your enquiries.</li>
+      <li><strong>Financial Planning Assistance:</strong> To understand your goals and provide relevant mutual fund distribution services.</li>
+      <li><strong>Communication:</strong> To follow up with you regarding your financial goals and to share relevant educational content.</li>
+      <li><strong>Compliance:</strong> To maintain records as required under AMFI regulations and applicable Indian laws.</li>
+    </ul>
+    <div class="important-box">
+      <span class="ib-icon">✅</span>
+      <div class="ib-text"><strong>Our Commitment</strong>We do not sell, rent, or commercially share your personal information with any third party for marketing purposes. Your data is used only to serve you better.</div>
+    </div>
+  </div>
+
+  <div class="clause" id="p3">
+    <div class="clause-num">03</div>
+    <h3>WhatsApp Communication</h3>
+    <p>Novartha Capital uses WhatsApp as a primary communication channel. When you contact us via WhatsApp or provide your WhatsApp number through our forms, please be aware that:</p>
+    <ul>
+      <li>WhatsApp communications are governed by WhatsApp's own Privacy Policy and Terms of Service.</li>
+      <li>By sharing your number and initiating contact, you consent to receiving communications from us via WhatsApp regarding your financial goals and our services.</li>
+      <li>You may opt out of WhatsApp communications at any time by requesting us to stop contacting you.</li>
+      <li>We do not add you to broadcast lists or group chats without your explicit consent.</li>
+    </ul>
+  </div>
+
+  <div class="clause" id="p4">
+    <div class="clause-num">04</div>
+    <h3>Sharing of Information</h3>
+    <p>We do not share your personal information with third parties except in the following limited circumstances:</p>
+    <ul>
+      <li><strong>Regulatory Compliance:</strong> When required by law, court order, or regulatory authority (such as AMFI or SEBI).</li>
+      <li><strong>AMC/Fund Houses:</strong> When you transact in mutual funds through us, your KYC and transaction details are shared with the relevant Asset Management Company as required for processing.</li>
+      <li><strong>Service Providers:</strong> We may use trusted technology service providers to operate our website and communication tools. These providers are bound by confidentiality obligations.</li>
+    </ul>
+    <p>In all cases, we share only the minimum information necessary for the stated purpose.</p>
+  </div>
+
+  <div class="clause" id="p5">
+    <div class="clause-num">05</div>
+    <h3>Data Storage &amp; Security</h3>
+    <p>We take reasonable technical and organisational measures to protect your personal information against unauthorised access, disclosure, alteration, or destruction. However, no method of electronic transmission or storage is 100% secure, and we cannot guarantee absolute security.</p>
+    <p>We retain your personal information only for as long as necessary to fulfil the purposes for which it was collected, or as required by applicable laws and AMFI regulations.</p>
+  </div>
+
+  <div class="clause" id="p6">
+    <div class="clause-num">06</div>
+    <h3>Cookies &amp; Website Analytics</h3>
+    <p>Our website may use cookies and similar tracking technologies to improve your browsing experience and understand how visitors use our site. Cookies are small text files stored on your device. You may configure your browser to refuse cookies, though this may affect some website functionality.</p>
+    <p>We may use analytics tools to understand website traffic patterns and improve our content. These tools may collect anonymised usage data and do not identify you personally.</p>
+  </div>
+
+  <div class="clause" id="p7">
+    <div class="clause-num">07</div>
+    <h3>Your Rights</h3>
+    <p>You have the following rights regarding your personal information held by us:</p>
+    <ul>
+      <li><strong>Access:</strong> You may request a copy of the personal information we hold about you.</li>
+      <li><strong>Correction:</strong> You may request correction of inaccurate or incomplete information.</li>
+      <li><strong>Deletion:</strong> You may request deletion of your personal information, subject to our legal and regulatory obligations.</li>
+      <li><strong>Opt-Out:</strong> You may opt out of marketing communications at any time by contacting us.</li>
+    </ul>
+    <p>To exercise any of these rights, please contact us at <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="94fdfaf2fbd4fafbe2f5e6e0fcf5f7f5e4fde0f5f8baf7fbf9">[email&#160;protected]</a> or via WhatsApp.</p>
+  </div>
+
+  <div class="clause" id="p8">
+    <div class="clause-num">08</div>
+    <h3>Children's Privacy</h3>
+    <p>Our website and services are intended for adults (18 years and above). We do not knowingly collect personal information from children under 18. If you believe a minor has provided us with their personal information, please contact us immediately and we will take steps to delete it.</p>
+  </div>
+
+  <div class="clause" id="p9">
+    <div class="clause-num">09</div>
+    <h3>Changes to This Policy</h3>
+    <p>We may update this Privacy Policy from time to time to reflect changes in our practices or applicable laws. The updated version will be posted on this page with the effective date. We encourage you to review this policy periodically.</p>
+  </div>
+
+  <div class="clause" id="p10">
+    <div class="clause-num">10</div>
+    <h3>Contact Us</h3>
+    <p>For any privacy-related questions or to exercise your rights, please contact us:</p>
+    <div class="contact-card">
+      <div>
+        <strong>Privacy Officer — Novartha Capital</strong>
+        <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="e881868e87a886879e899a9c80898b8998819c8984c68b8785">[email&#160;protected]</a><br/>AMFI Registered Mutual Fund Distributor<br/>Gujarat, India</p>
+      </div>
+      <a href="https://wa.me/919979232324?text=Hi%2C%20I%20have%20a%20privacy%20related%20query" target="_blank" class="btn-wa-small">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+
+</div><!-- end privacy -->
+
+<!-- ════════════════════════════════════════
+     DISCLAIMER
+════════════════════════════════════════ -->
+<div class="doc-section" id="doc-disclaimer">
+
+  <div class="doc-meta">
+    <span class="doc-meta-badge">⚠️ Disclaimer</span>
+    <span class="doc-meta-date">Last Updated: March 2025 · Effective Immediately</span>
+  </div>
+
+  <h1 class="doc-h1">Investment <em>Disclaimer</em></h1>
+  <p class="doc-lead">Please read this disclaimer carefully. It sets out important limitations and disclosures regarding the nature of Novartha Capital's services and the information provided on this website.</p>
+
+  <div class="disclaimer-block">
+    <h3>Standard <em>Regulatory Disclaimer</em></h3>
+    <p><strong>Mutual Fund investments are subject to market risks.</strong> Please read all scheme-related documents carefully before investing. The value of investments and the income from them can go down as well as up. Past performance is not indicative of future results.</p>
+    <p>Novartha Capital is an AMFI Registered Mutual Fund Distributor. We are <strong>not a SEBI Registered Investment Advisor (RIA)</strong>. The information, guidance, and resources provided by us do not constitute investment advice as defined under the SEBI (Investment Advisers) Regulations, 2013.</p>
+    <p>Investors are advised to seek advice from a SEBI Registered Investment Advisor before making investment decisions, particularly for large or complex investment requirements.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-num">General</div>
+    <h3>General Information Disclaimer</h3>
+    <p>All content on this website — including articles, guides, blog posts, calculator results, and educational materials — is provided for <strong>general informational and educational purposes only</strong>. Nothing on this website should be construed as:</p>
+    <ul>
+      <li>A recommendation to buy, sell, or hold any specific mutual fund scheme or financial product.</li>
+      <li>Personalised investment advice tailored to your individual financial circumstances.</li>
+      <li>A guarantee or promise of any particular investment return or outcome.</li>
+      <li>Legal, tax, accounting, or regulatory advice of any kind.</li>
+    </ul>
+    <p>Each investor's financial situation, risk tolerance, and investment horizon is unique. What may be appropriate for one investor may not be suitable for another. You should always conduct your own due diligence and consult appropriate professional advisors.</p>
+  </div>
+
+  <div class="section-rule"></div>
+
+  <div class="clause">
+    <div class="clause-num">Distributor</div>
+    <h3>Distributor Disclosure</h3>
+    <p>Novartha Capital earns distributor commissions from Asset Management Companies (AMCs) when investors purchase mutual fund schemes through us. These commissions are paid by the AMC and are disclosed in the scheme information documents.</p>
+    <p>While we strive to provide objective and client-centric guidance, investors should be aware of this compensation structure. We are committed to recommending only schemes that are suitable for the investor's stated goals and risk profile, without being influenced by commission structures.</p>
+    <div class="important-box">
+      <span class="ib-icon">💡</span>
+      <div class="ib-text"><strong>Direct vs. Regular Plans</strong>Mutual funds are available as both Direct Plans (purchased directly from AMCs, without distributor commission) and Regular Plans (purchased through distributors like Novartha Capital). Regular plans may have slightly higher expense ratios. We are happy to discuss both options with you transparently.</div>
+    </div>
+  </div>
+
+  <div class="clause">
+    <div class="clause-num">Calculators</div>
+    <h3>Calculator &amp; Projection Disclaimer</h3>
+    <p>The financial calculators and projection tools on this website use simplified mathematical models to illustrate potential investment outcomes. These projections:</p>
+    <ul>
+      <li>Assume consistent, uniform returns over the investment period, which is not how markets behave in reality.</li>
+      <li>Do not account for market volatility, sequence-of-return risk, or periods of negative returns.</li>
+      <li>Do not include the impact of fund expense ratios, exit loads, or taxation on returns unless explicitly stated.</li>
+      <li>Are based on inputs provided by you and are only as accurate as those inputs.</li>
+      <li>Should not be used as the sole basis for any investment decision.</li>
+    </ul>
+    <div class="clause-box"><p>"Projections, illustrations, and worked examples on this website are for educational purposes only. Actual investment outcomes will differ. No returns are guaranteed."</p></div>
+  </div>
+
+  <div class="clause">
+    <div class="clause-num">External</div>
+    <h3>External Content &amp; Third-Party Information</h3>
+    <p>This website may reference or link to information from third-party sources, regulatory bodies, and market data providers. While we endeavour to ensure the accuracy of information presented, we cannot verify or guarantee the accuracy, completeness, or timeliness of third-party information. Novartha Capital accepts no liability for any errors or omissions in third-party content.</p>
+    <p>References to historical data, market statistics, or performance figures sourced from external parties are reproduced in good faith for educational purposes only.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-num">Risk</div>
+    <h3>Risk Acknowledgement</h3>
+    <p>All investments carry risk. By using this website and engaging with Novartha Capital's services, you acknowledge and accept that:</p>
+    <ul>
+      <li>Equity mutual funds carry significant market risk and can result in loss of capital.</li>
+      <li>Debt mutual funds carry interest rate risk, credit risk, and liquidity risk.</li>
+      <li>Past performance of any fund, advisor, or strategy is not a reliable indicator of future performance.</li>
+      <li>SIP (Systematic Investment Plan) investments do not guarantee profit or protect against loss in declining markets.</li>
+      <li>Diversification and systematic investing reduce but do not eliminate investment risk.</li>
+    </ul>
+    <p>We strongly recommend that investors read the Key Information Memorandum (KIM) and Scheme Information Document (SID) of any mutual fund scheme before investing.</p>
+  </div>
+
+  <div class="clause">
+    <div class="clause-num">Limitation</div>
+    <h3>Limitation of Liability</h3>
+    <p>Novartha Capital, its principals, employees, distributors, and associates shall not be held responsible or liable for any financial loss, damage, or adverse outcome arising from:</p>
+    <ul>
+      <li>Investment decisions made based on information, guidance, or tools provided on this website.</li>
+      <li>Reliance on educational content, guides, or case studies presented on this platform.</li>
+      <li>Market movements, fund performance, or any other factors beyond our control.</li>
+      <li>Technical errors, inaccuracies, or omissions in website content or calculator results.</li>
+    </ul>
+    <p>Your engagement with Novartha Capital and your investment decisions are made at your own informed discretion and risk.</p>
+  </div>
+
+  <div class="section-rule"></div>
+
+  <div class="clause">
+    <div class="clause-num">Contact</div>
+    <h3>Questions About This Disclaimer</h3>
+    <p>If you have any questions about this disclaimer or would like to understand more about our services, compensation structure, or the nature of our engagement, please reach out:</p>
+    <div class="contact-card">
+      <div>
+        <strong>Novartha Capital</strong>
+        <p>Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7a13141c153a14150c1b080e121b191b0a130e1b1654191517">[email&#160;protected]</a><br/>AMFI Registered Mutual Fund Distributor<br/>Gujarat, India</p>
+      </div>
+      <a href="https://wa.me/919979232324?text=Hi%2C%20I%20have%20a%20question%20about%20your%20disclaimer" target="_blank" class="btn-wa-small">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+
+</div><!-- end disclaimer -->
+</div><!-- end doc-body -->
+
+<!-- PAGE FOOTER -->
+<div class="page-footer">
+  <p>© 2024 Novartha Capital. All rights reserved. AMFI Registered Mutual Fund Distributor.</p>
+  <a href="https://novarthacapital.com/">← Return to Main Website</a>
+</div>
+
+<script>
+/* ── TAB MAP: which section-id each clause belongs to ── */
+var clauseTabMap = {
+  t1:'terms', t2:'terms', t3:'terms', t4:'terms', t5:'terms', t6:'terms',
+  t7:'terms', t8:'terms', t9:'terms', t10:'terms', t11:'terms', t12:'terms',
+  p1:'privacy', p2:'privacy', p3:'privacy', p4:'privacy', p5:'privacy',
+  p6:'privacy', p7:'privacy', p8:'privacy', p9:'privacy', p10:'privacy'
+};
+
+/* ── SWITCH TAB ── */
+function showDoc(tabId, btn) {
+  document.querySelectorAll('.doc-section').forEach(function(s){ s.classList.remove('active'); });
+  document.querySelectorAll('.doc-tab').forEach(function(b){ b.classList.remove('active'); });
+  var section = document.getElementById('doc-' + tabId);
+  if (section) section.classList.add('active');
+  if (btn) btn.classList.add('active');
+}
+
+/* ── SCROLL TO CLAUSE (works after section is visible) ── */
+function scrollToClause(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  /* nav fixed (68px) + sticky tabs (52px) + padding (16px) */
+  var offset = 68 + 52 + 16;
+  var rect = el.getBoundingClientRect();
+  var top = rect.top + window.pageYOffset - offset;
+  window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+}
+
+/* ── NAVIGATE: switch tab then scroll ── */
+function navigateToClause(id) {
+  var tabId = clauseTabMap[id];
+  if (!tabId) return;
+
+  /* Find the tab button */
+  var tabs = document.querySelectorAll('.doc-tab');
+  var tabBtn = null;
+  tabs.forEach(function(btn) {
+    var onclick = btn.getAttribute('onclick') || '';
+    if (onclick.indexOf("'" + tabId + "'") !== -1 || onclick.indexOf('"' + tabId + '"') !== -1) {
+      tabBtn = btn;
+    }
+  });
+
+  /* Switch tab */
+  showDoc(tabId, tabBtn);
+
+  /* Wait for display:none → display:block paint, then scroll */
+  requestAnimationFrame(function() {
+    requestAnimationFrame(function() {
+      scrollToClause(id);
+    });
+  });
+}
+
+/* ── INTERCEPT ALL ANCHOR CLICKS IN TOC ── */
+document.addEventListener('click', function(e) {
+  var a = e.target.closest('a[href^="#"]');
+  if (!a) return;
+  var href = a.getAttribute('href');
+  if (!href || href === '#') return;
+  var id = href.replace('#', '');
+  if (!id) return;
+  /* Only handle clause anchors (t1-t12, p1-p10) */
+  if (clauseTabMap[id]) {
+    e.preventDefault();
+    navigateToClause(id);
+  }
+  /* Let tab-level anchors (#terms, #privacy, #disclaimer) be handled by showDoc */
+});
+
+/* ── HANDLE URL HASH ON LOAD ── */
+document.addEventListener('DOMContentLoaded', function() {
+  var hash = location.hash.replace('#', '');
+  if (hash === 'privacy') {
+    showDoc('privacy', document.querySelectorAll('.doc-tab')[1]);
+  } else if (hash === 'disclaimer') {
+    showDoc('disclaimer', document.querySelectorAll('.doc-tab')[2]);
+  } else if (hash === 'terms') {
+    showDoc('terms', document.querySelectorAll('.doc-tab')[0]);
+  }
+  /* If hash is a clause ID, navigate to it */
+  if (clauseTabMap[hash]) {
+    setTimeout(function() { navigateToClause(hash); }, 350);
+  }
+});
+</script>
+</body>
+</html>
