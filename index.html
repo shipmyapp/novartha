@@ -371,11 +371,15 @@ nav.scrolled{box-shadow:var(--shadow-md);}
   background:linear-gradient(90deg,var(--brass),var(--gold2));
   margin:20px 0;border-radius:1px;
 }
+/* Footer column base */
+.footer-col{}
+/* Count-up number display */
+.count-num{display:inline;font-family:'Cormorant Garamond',serif;font-size:2.1rem;font-weight:600;color:var(--forest);}
 
-/* Reveal */
-.reveal{opacity:0;transform:translateY(22px);transition:opacity 0.7s ease,transform 0.65s ease;}
-.reveal.visible{opacity:1;transform:none;}
-.d1{transition-delay:0.1s;}.d2{transition-delay:0.2s;}.d3{transition-delay:0.3s;}.d4{transition-delay:0.4s;}
+/* Reveal — animate on scroll, always fallback to visible */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity 0.55s ease,transform 0.5s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.d1{transition-delay:0.07s;}.d2{transition-delay:0.14s;}.d3{transition-delay:0.21s;}.d4{transition-delay:0.28s;}
 
 /* ═══════════════════════════════════════════════════
    LEAD MAGNET
@@ -775,7 +779,9 @@ footer{
 }
 @media(max-width:768px){
   .nav-menu,.nav-actions{display:none;}
-  .hero-h1{font-size:2.6rem;}
+  .hero-h1{font-size:2.2rem;}
+  .hero-stats{gap:20px;flex-wrap:wrap;}
+  .hero-stats .hs-item{min-width:calc(50% - 10px);}
   .lm-inner{grid-template-columns:1fr;}
   .team-grid{grid-template-columns:1fr;}
   .cases-grid{grid-template-columns:1fr;}
@@ -785,6 +791,11 @@ footer{
   .testi-grid{grid-template-columns:1fr;}
   .offer-card{padding:44px 28px;}
   .footer-top{grid-template-columns:1fr;}
+  .section{padding:64px 5%;}
+  .lm-section{padding:60px 5%;}
+  .pain-pullquote{padding:28px 22px;flex-direction:column;}
+  .cases-grid{grid-template-columns:1fr;}
+  .testi-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -792,7 +803,7 @@ footer{
 
 <!-- ══ NAVIGATION ══ -->
 <nav id="mainNav">
-  <a href="#home" class="nav-logo">
+  <a href="https://novarthacapital.com/" class="nav-logo">
     <img src="/novarthalogo.png" alt="Novartha Capital"/>
     <div>
       <div class="nav-brand-name">Novartha Capital</div>
@@ -824,43 +835,16 @@ footer{
       </div>
     </div>
 
-    <!-- Resources → Free Guide + Calculators -->
+    <!-- Resources → Calculators dropdown (matches reference site) -->
     <div class="nav-item">
       <a href="#" class="nav-link">
         Resources
         <svg class="chevron" viewBox="0 0 24 24" stroke-width="2.5"><path d="M6 9l6 6 6-6"/></svg>
       </a>
       <div class="nav-dropdown">
-        <div class="dd-label">Free Guide</div>
-        <a class="dd-item" href="#lead-magnet" onclick="smoothTo('#lead-magnet',event)">
-          <span class="dd-item-icon">📘</span>
-          <div><strong>Investment Guide</strong><span>₹10,000 SIP Blueprint — Free PDF</span></div>
-        </a>
-        <div class="dd-sep"></div>
-        <div class="dd-label">Calculators</div>
-        <a class="dd-item" href="novartha-calculators.html" target="_blank">
+        <a class="dd-item" href="https://novarthacapital.com/calculator" target="_blank">
           <span class="dd-item-icon">🧮</span>
-          <div><strong>All Calculators</strong><span>SIP, retirement, goals</span></div>
-        </a>
-        <a class="dd-item" href="novartha-calculators.html#child-education" target="_blank">
-          <span class="dd-item-icon">🎓</span>
-          <div><strong>Child Education</strong></div>
-        </a>
-        <a class="dd-item" href="novartha-calculators.html#child-wedding" target="_blank">
-          <span class="dd-item-icon">💍</span>
-          <div><strong>Child Wedding</strong></div>
-        </a>
-        <a class="dd-item" href="novartha-calculators.html#dream-home" target="_blank">
-          <span class="dd-item-icon">🏡</span>
-          <div><strong>Dream Home / Car / Vacation</strong></div>
-        </a>
-        <a class="dd-item" href="novartha-calculators.html#retirement" target="_blank">
-          <span class="dd-item-icon">🌅</span>
-          <div><strong>Retirement Planning</strong></div>
-        </a>
-        <a class="dd-item" href="novartha-calculators.html" target="_blank">
-          <span class="dd-item-icon">📈</span>
-          <div><strong>SIP Calculator</strong></div>
+          <div><strong>Calculators</strong></div>
         </a>
       </div>
     </div>
@@ -897,20 +881,20 @@ footer{
       </div>
       <div class="hero-stats">
         <div class="hs-item">
-          <div class="hs-num" data-count="50">0</div>
-          <div class="hs-label">Crore+ AUA</div>
+          <div class="hs-num"><span class="count-num" data-count="50" data-suffix="Cr+">₹50Cr+</span></div>
+          <div class="hs-label">Assets Under Advisory</div>
         </div>
         <div class="hs-item">
-          <div class="hs-num" data-count="500">0</div>
+          <div class="hs-num"><span class="count-num" data-count="500" data-suffix="+">500+</span></div>
           <div class="hs-label">Families Served</div>
         </div>
         <div class="hs-item">
-          <div class="hs-num" data-count="30">0</div>
+          <div class="hs-num"><span class="count-num" data-count="30" data-suffix="+">30+</span></div>
           <div class="hs-label">Years Combined</div>
         </div>
         <div class="hs-item">
-          <div class="hs-num" data-count="98">0</div>
-          <div class="hs-label">% Retention</div>
+          <div class="hs-num"><span class="count-num" data-count="98" data-suffix="%">98%</span></div>
+          <div class="hs-label">Client Retention</div>
         </div>
       </div>
     </div>
@@ -927,9 +911,9 @@ footer{
         <a href="#lead-magnet" class="btn-gold" style="display:inline-flex;gap:8px;padding:12px 24px;font-size:0.88rem;">Get Free Guide →</a>
       </div>
       <div class="hero-mini-cards">
-        <div class="hmc"><div class="hmc-num" data-count="50">0</div><div class="hmc-label">Crore+ AUA</div></div>
-        <div class="hmc"><div class="hmc-num" data-count="500">0</div><div class="hmc-label">Families</div></div>
-        <div class="hmc"><div class="hmc-num" data-count="30">0</div><div class="hmc-label">Yrs Experience</div></div>
+        <div class="hmc"><div class="hmc-num">₹50Cr+</div><div class="hmc-label">Assets Under Advisory</div></div>
+        <div class="hmc"><div class="hmc-num">500+</div><div class="hmc-label">Families Served</div></div>
+        <div class="hmc"><div class="hmc-num">30+</div><div class="hmc-label">Yrs Experience</div></div>
       </div>
     </div>
   </div>
@@ -1064,12 +1048,12 @@ footer{
     <div class="rule reveal"></div>
     <p class="section-sub reveal">We don't sell products. We build strategies around what matters most to your family. Use our calculators to plan each goal.</p>
     <div class="goals-grid">
-      <div class="goal-card reveal"><div class="goal-icon-wrap">🏡</div><h4>Dream Home</h4><p>Build your down payment corpus without straining monthly cash flow or taking unnecessary risk.</p><a href="novartha-calculators.html#dream-home" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
-      <div class="goal-card reveal d1"><div class="goal-icon-wrap">🎓</div><h4>Child's Education</h4><p>Beat education inflation with goal-specific SIPs. Never let fees come between your child and their dream.</p><a href="novartha-calculators.html#child-education" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
-      <div class="goal-card reveal d2"><div class="goal-icon-wrap">🌅</div><h4>Retirement</h4><p>Define your freedom number. Build the corpus that lets you retire on your own terms, years ahead of schedule.</p><a href="novartha-calculators.html#retirement" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
-      <div class="goal-card reveal"><div class="goal-icon-wrap">💍</div><h4>Child's Wedding</h4><p>Give your child a celebration to remember — without loans, without stress, and without touching other investments.</p><a href="novartha-calculators.html#child-wedding" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
-      <div class="goal-card reveal d1"><div class="goal-icon-wrap">🚗</div><h4>Dream Car</h4><p>Drive debt-free. Invest systematically so you pay cash on delivery — zero EMI, zero interest to the bank.</p><a href="novartha-calculators.html#dream-car" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
-      <div class="goal-card reveal d2"><div class="goal-icon-wrap">✈️</div><h4>Dream Vacation</h4><p>That Europe trip or Maldives getaway — plan and invest for your experiences, not just your obligations.</p><a href="novartha-calculators.html#dream-vacation" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
+      <div class="goal-card reveal"><div class="goal-icon-wrap">🏡</div><h4>Dream Home</h4><p>Build your down payment corpus without straining monthly cash flow or taking unnecessary risk.</p><a href="https://novarthacapital.com/calculator#dream-home" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
+      <div class="goal-card reveal d1"><div class="goal-icon-wrap">🎓</div><h4>Child's Education</h4><p>Beat education inflation with goal-specific SIPs. Never let fees come between your child and their dream.</p><a href="https://novarthacapital.com/calculator#child-education" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
+      <div class="goal-card reveal d2"><div class="goal-icon-wrap">🌅</div><h4>Retirement</h4><p>Define your freedom number. Build the corpus that lets you retire on your own terms, years ahead of schedule.</p><a href="https://novarthacapital.com/calculator#retirement" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
+      <div class="goal-card reveal"><div class="goal-icon-wrap">💍</div><h4>Child's Wedding</h4><p>Give your child a celebration to remember — without loans, without stress, and without touching other investments.</p><a href="https://novarthacapital.com/calculator#child-wedding" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
+      <div class="goal-card reveal d1"><div class="goal-icon-wrap">🚗</div><h4>Dream Car</h4><p>Drive debt-free. Invest systematically so you pay cash on delivery — zero EMI, zero interest to the bank.</p><a href="https://novarthacapital.com/calculator#dream-car" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
+      <div class="goal-card reveal d2"><div class="goal-icon-wrap">✈️</div><h4>Dream Vacation</h4><p>That Europe trip or Maldives getaway — plan and invest for your experiences, not just your obligations.</p><a href="https://novarthacapital.com/calculator#dream-vacation" target="_blank" class="goal-link">Calculate SIP needed →</a></div>
     </div>
   </div>
 </section>
@@ -1096,7 +1080,7 @@ footer{
             <span class="tc-tag">15+ Years</span>
             <span class="tc-tag">Mutual Funds Expert</span>
           </div>
-          <a href="ankit-mehta-profile.html" target="_blank" class="tc-link">View Full Experience</a>
+          <a href="https://novarthacapital.com/ankit-mehta" target="_blank" class="tc-link">View Full Experience</a>
         </div>
       </div>
       <div class="team-card reveal d2">
@@ -1113,7 +1097,7 @@ footer{
             <span class="tc-tag">15+ Years</span>
             <span class="tc-tag">Retirement Specialist</span>
           </div>
-          <a href="arpita-mehta-profile.html" target="_blank" class="tc-link">View Full Experience</a>
+          <a href="https://novarthacapital.com/arpita-mehta" target="_blank" class="tc-link">View Full Experience</a>
         </div>
       </div>
     </div>
@@ -1215,7 +1199,7 @@ footer{
   <p>Start today. Even ₹500/month invested right can change everything 20 years from now.</p>
   <div class="cta-btns">
     <a href="#lead-magnet" class="btn-primary">📘 Download Free Guide</a>
-    <a href="novartha-calculators.html" target="_blank" class="btn-gold">🧮 Try Calculators</a>
+    <a href="https://novarthacapital.com/calculator" target="_blank" class="btn-gold">🧮 Try Calculators</a>
     <a href="https://wa.me/919979232324?text=Hi%2C%20I%20am%20ready%20to%20start%20investing%20with%20Novartha%20Capital" target="_blank" class="btn-wa" style="padding:14px 28px;font-size:0.9rem;">
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
       Start Investing Now
@@ -1228,8 +1212,8 @@ footer{
   <div class="footer-inner">
     <div class="footer-top">
       <div>
-        <a href="#home" class="footer-logo-link">
-          <img src="/mnt/user-data/uploads/3ac15283-17d5-4ccd-b9dd-ab06c51ec646.png" alt="Novartha Capital"/>
+        <a href="https://novarthacapital.com/" class="footer-logo-link">
+          <img src="/novarthalogo.png" alt="Novartha Capital"/>
           <div>
             <div class="footer-brand-name">Novartha Capital</div>
             <span class="footer-brand-sub">Nurturing Wealth, Harvesting Potential</span>
@@ -1237,49 +1221,62 @@ footer{
         </a>
         <p class="footer-about">A trusted, client-first financial advisory firm helping Indian families build real, lasting wealth through disciplined investing and personalised guidance.</p>
         <div class="footer-contact">
-          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          +91 99792 32324
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <a href="/cdn-cgi/l/email-protection#462f282029062829302734322e272527362f32272a6825292b" style="color:rgba(255,255,255,0.5);"><span class="__cf_email__" data-cfemail="1871767e775876776e796a6c70797b7968716c7974367b7775">[email&#160;protected]</span></a>
         </div>
         <div class="footer-contact">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          info@novarthacapital.com
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
+          <a href="https://wa.me/919979232324" target="_blank" style="color:rgba(255,255,255,0.5);">+91 99792 32324</a>
+        </div>
+        <div style="margin-top:18px;display:inline-flex;align-items:center;gap:9px;background:rgba(215,181,109,0.1);border:1px solid rgba(215,181,109,0.25);border-radius:6px;padding:9px 14px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.25C17.25 22.15 21 17.25 21 12V7L12 2z" stroke="#D7B56D" stroke-width="1.8" stroke-linejoin="round"/></svg>
+          <span style="font-size:0.75rem;color:var(--gold2);font-weight:600;letter-spacing:0.3px;">AMFI Registered Mutual Fund Distributor</span>
         </div>
       </div>
       <div class="footer-col">
         <h5>Quick Links</h5>
         <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#team">About Us</a></li>
-          <li><a href="#offerings" onclick="showOffering('services')">Services</a></li>
-          <li><a href="#offerings" onclick="showOffering('products')">Products</a></li>
-          <li><a href="#offer">Contact Us</a></li>
+          <li><a href="https://novarthacapital.com/">Home</a></li>
+          <li><a href="https://novarthacapital.com/#team">About Us</a></li>
+          <li><a href="https://novarthacapital.com/#offerings" onclick="showOffering('services')">Services</a></li>
+          <li><a href="https://novarthacapital.com/#offerings" onclick="showOffering('products')">Products</a></li>
+          <li><a href="https://novarthacapital.com/#offer">Contact Us</a></li>
         </ul>
       </div>
       <div class="footer-col">
-        <h5>Calculators</h5>
+        <h5>Calculator</h5>
         <ul>
-          <li><a href="novartha-calculators.html#child-education" target="_blank">Child Education</a></li>
-          <li><a href="novartha-calculators.html#child-wedding" target="_blank">Child Wedding</a></li>
-          <li><a href="novartha-calculators.html#dream-home" target="_blank">Dream Home / Car / Vacation</a></li>
-          <li><a href="novartha-calculators.html#retirement" target="_blank">Retirement Planning</a></li>
-          <li><a href="novartha-calculators.html" target="_blank">SIP Calculator</a></li>
+          <li><a href="https://novarthacapital.com/calculator" target="_blank">Financial Calculators</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h5>Offerings</h5>
         <ul>
-          <li><a href="#offerings" onclick="showOffering('services')">Education Planning</a></li>
-          <li><a href="#offerings" onclick="showOffering('services')">Retirement Planning</a></li>
-          <li><a href="#offerings" onclick="showOffering('services')">Estate Planning</a></li>
-          <li><a href="#offerings" onclick="showOffering('products')">Mutual Funds</a></li>
-          <li><a href="#offerings" onclick="showOffering('products')">Life &amp; Health Insurance</a></li>
-          <li><a href="#offerings" onclick="showOffering('products')">PMS &amp; AIF</a></li>
+          <li><a href="https://novarthacapital.com/#offerings" onclick="showOffering('services')">Education Planning</a></li>
+          <li><a href="https://novarthacapital.com/#offerings" onclick="showOffering('services')">Retirement Planning</a></li>
+          <li><a href="https://novarthacapital.com/#offerings" onclick="showOffering('services')">Estate Planning</a></li>
+          <li><a href="https://novarthacapital.com/#offerings" onclick="showOffering('products')">Mutual Funds</a></li>
+          <li><a href="https://novarthacapital.com/#offerings" onclick="showOffering('products')">Life &amp; Health Insurance</a></li>
+          <li><a href="https://novarthacapital.com/#offerings" onclick="showOffering('products')">PMS &amp; AIF</a></li>
         </ul>
       </div>
     </div>
+    <!-- DISCLAIMER BAND -->
+    <div style="background:rgba(215,181,109,0.07);border:1px solid rgba(215,181,109,0.15);border-radius:8px;padding:18px 24px;margin-bottom:24px;">
+      <p style="font-size:0.74rem;color:rgba(255,255,255,0.38);line-height:1.65;"><strong style="color:rgba(215,181,109,0.7);font-weight:600;letter-spacing:0.5px;">DISCLAIMER:</strong> Novartha Capital is an AMFI Registered Mutual Fund Distributor. Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future returns. The information provided on this website is for educational and informational purposes only and does not constitute financial, investment, legal, or tax advice. Investors are advised to consult their financial advisor before making any investment decisions. Novartha Capital is not liable for any investment decisions made based on the content of this website.</p>
+    </div>
     <div class="footer-bottom">
       <p class="footer-copy">© 2024 Novartha Capital. All rights reserved. AMFI Registration No: XXXXXXXX</p>
-      <p class="footer-disc">Mutual fund investments are subject to market risks. Please read all scheme-related documents carefully before investing. Past performance is not indicative of future returns. This website is for informational purposes only and does not constitute investment advice.</p>
+      <div style="display:flex;gap:18px;flex-wrap:wrap;align-items:center;">
+        <a href="https://novarthacapital.com/tncnpf#privacy" style="color:rgba(255,255,255,0.32);font-size:0.76rem;transition:color 0.2s;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='rgba(255,255,255,0.32)'">Privacy Policy</a>
+        <span style="color:rgba(255,255,255,0.15);font-size:0.76rem;">|</span>
+        <a href="https://novarthacapital.com/tncnpf#terms" style="color:rgba(255,255,255,0.32);font-size:0.76rem;transition:color 0.2s;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='rgba(255,255,255,0.32)'">Terms &amp; Conditions</a>
+        <span style="color:rgba(255,255,255,0.15);font-size:0.76rem;">|</span>
+        <a href="https://novarthacapital.com/tncnpf#disclaimer" style="color:rgba(255,255,255,0.32);font-size:0.76rem;transition:color 0.2s;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='rgba(255,255,255,0.32)'">Disclaimer</a>
+      </div>
+    </div>
+    <div style="border-top:1px solid rgba(255,255,255,0.05);margin-top:18px;padding-top:16px;text-align:center;">
+      <p style="font-size:0.73rem;color:rgba(255,255,255,0.2);">Website developed by <a href="https://shipmyapp.in/" target="_blank" style="color:rgba(215,181,109,0.55);font-weight:500;transition:color 0.2s;" onmouseover="this.style.color='var(--gold2)'" onmouseout="this.style.color='rgba(215,181,109,0.55)'">ShipMyApp.in</a></p>
     </div>
   </div>
 </footer>
@@ -1291,65 +1288,98 @@ footer{
 </a>
 
 <script>
-/* NAV SCROLL */
-window.addEventListener('scroll',()=>{
+/* ── NAV SCROLL ── */
+window.addEventListener('scroll',function(){
   document.getElementById('mainNav').classList.toggle('scrolled',window.scrollY>50);
 });
 
-/* SCROLL REVEAL */
-const ro=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
-},{threshold:0.1});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+/* ── SCROLL REVEAL — low threshold + instant fallback ── */
+(function(){
+  var els=document.querySelectorAll('.reveal');
+  function revealAll(){
+    els.forEach(function(el){el.classList.add('visible');});
+  }
+  if(!('IntersectionObserver' in window)){revealAll();return;}
+  var ro=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){e.target.classList.add('visible');ro.unobserve(e.target);}
+    });
+  },{threshold:0.01,rootMargin:'0px 0px -20px 0px'});
+  els.forEach(function(el){ro.observe(el);});
+  /* Force-reveal anything still hidden after 600ms */
+  setTimeout(function(){
+    document.querySelectorAll('.reveal:not(.visible)').forEach(function(el){el.classList.add('visible');});
+  },600);
+  /* Also reveal everything on first scroll */
+  var scrolled=false;
+  window.addEventListener('scroll',function(){
+    if(scrolled)return;
+    scrolled=true;
+    document.querySelectorAll('.reveal:not(.visible)').forEach(function(el){el.classList.add('visible');});
+  },{once:true});
+})();
 
-/* COUNT-UP */
-function countUp(el,target,dur){
-  let v=0,step=target/(dur/16);
-  const t=setInterval(()=>{
-    v=Math.min(v+step,target);
-    el.textContent=Math.floor(v)+(el.dataset.suffix||'');
-    if(v>=target)clearInterval(t);
-  },16);
+/* ── COUNT-UP for .count-num ── */
+function runCountUp(el){
+  var target=+el.dataset.count;
+  var suffix=el.dataset.suffix||'';
+  var prefix=el.dataset.prefix||'';
+  var dur=1400;
+  var start=null;
+  function step(ts){
+    if(!start)start=ts;
+    var progress=Math.min((ts-start)/dur,1);
+    var ease=1-Math.pow(1-progress,3);
+    el.textContent=prefix+Math.floor(ease*target)+suffix;
+    if(progress<1)requestAnimationFrame(step);
+    else el.textContent=prefix+target+suffix;
+  }
+  requestAnimationFrame(step);
 }
-const co=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      countUp(e.target,+e.target.dataset.count,1200);
-      co.unobserve(e.target);
-    }
+var co=new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){runCountUp(e.target);co.unobserve(e.target);}
   });
-},{threshold:0.5});
-document.querySelectorAll('[data-count]').forEach(el=>co.observe(el));
+},{threshold:0.3});
+document.querySelectorAll('.count-num[data-count]').forEach(function(el){
+  co.observe(el);
+});
 
-/* OFFERINGS TABS */
+/* ── OFFERINGS TABS ── */
 function showOffering(id,event){
-  if(event) event.preventDefault();
-  document.querySelectorAll('.offerings-panel').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.otab').forEach(b=>b.classList.remove('active'));
-  const panel=document.getElementById('panel-'+id);
+  if(event)event.preventDefault();
+  document.querySelectorAll('.offerings-panel').forEach(function(p){p.classList.remove('active');});
+  document.querySelectorAll('.otab').forEach(function(b){b.classList.remove('active');});
+  var panel=document.getElementById('panel-'+id);
   if(panel){panel.classList.add('active');}
-  const btn=document.getElementById('tab-btn-'+id);
+  var btn=document.getElementById('tab-btn-'+id);
   if(btn){btn.classList.add('active');}
-  if(event){setTimeout(()=>{document.getElementById('offerings').scrollIntoView({behavior:'smooth'});},80);}
+  if(event){setTimeout(function(){
+    var s=document.getElementById('offerings');
+    if(s)s.scrollIntoView({behavior:'smooth'});
+  },80);}
 }
 
-/* LEAD FORM */
+/* ── LEAD FORM ── */
 function handleLead(e){
   e.preventDefault();
-  const name=document.getElementById('lm-name').value.trim();
-  const msg=encodeURIComponent('Hi, I downloaded your free guide. My name is '+name+'. Can you help me plan my investments?');
+  var name=document.getElementById('lm-name').value.trim();
+  if(!name)return;
+  var msg=encodeURIComponent('Hi, I downloaded your free guide. My name is '+name+'. Can you help me plan my investments?');
   window.open('https://wa.me/919979232324?text='+msg,'_blank');
 }
 
-/* SMOOTH SCROLL */
+/* ── SMOOTH SCROLL ── */
 function smoothTo(selector,event){
-  if(event) event.preventDefault();
-  const el=document.querySelector(selector);
-  if(el) el.scrollIntoView({behavior:'smooth'});
+  if(event)event.preventDefault();
+  var el=document.querySelector(selector);
+  if(el)el.scrollIntoView({behavior:'smooth'});
 }
-document.querySelectorAll('a[href^="#"]').forEach(a=>{
-  a.addEventListener('click',e=>{
-    const t=document.querySelector(a.getAttribute('href'));
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var href=a.getAttribute('href');
+    if(href==='#')return;
+    var t=document.querySelector(href);
     if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
   });
 });
