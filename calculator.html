@@ -45,7 +45,7 @@ a{text-decoration:none;color:inherit;}
 
 /* ── NAV ── */
 nav{
-  position:fixed;top:0;left:0;right:0;z-index:900;height:68px;
+  position:fixed;top:0;left:0;right:0;z-index:900;height:92px;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 6%;
   background:rgba(253,249,242,0.96);
@@ -54,8 +54,8 @@ nav{
   box-shadow:var(--shadow-sm);
 }
 .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.nav-logo img{height:38px;width:38px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border2);}
-.nav-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:600;color:var(--forest);}
+.nav-logo img{height:60px;width:60px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border2);}
+.nav-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;color:var(--forest);}
 .nav-brand-tag{display:block;font-family:'Jost',sans-serif;font-size:0.54rem;color:var(--muted);letter-spacing:2.5px;text-transform:uppercase;margin-top:2px;}
 .nav-right{display:flex;align-items:center;gap:14px;}
 .nav-back{
@@ -109,23 +109,23 @@ nav{
   background:var(--paper);
   border-bottom:1px solid var(--border);
   padding:20px 6%;
-  position:sticky;top:68px;z-index:800;
+  position:sticky;top:92px;z-index:800;
 }
 .goal-tabs{
   max-width:1000px;margin:0 auto;
   display:flex;gap:8px;flex-wrap:wrap;justify-content:center;
 }
 .gtab{
-  display:inline-flex;align-items:center;gap:7px;
-  padding:9px 18px;border-radius:40px;
+  display:inline-flex;align-items:center;gap:10px;
+  padding:12px 26px;border-radius:40px;
   background:var(--white);border:1.5px solid var(--border);
-  color:var(--ink2);font-size:0.83rem;font-weight:500;
+  color:var(--ink2);font-size:1.0rem;font-weight:500;
   cursor:pointer;font-family:'Jost',sans-serif;
   transition:all 0.22s;white-space:nowrap;
 }
 .gtab:hover{border-color:var(--brass);color:var(--brass);background:rgba(168,103,40,0.04);}
 .gtab.active{background:var(--forest);border-color:var(--forest);color:var(--white);}
-.gtab-icon{font-size:1rem;}
+.gtab-icon{font-size:1.15rem;}
 
 /* ── CALC SECTION ── */
 .calc-section{padding:48px 6% 80px;}
@@ -291,7 +291,7 @@ input[type=range]::-moz-range-track{background:var(--paper2);height:5px;border-r
 <!-- NAV -->
 <nav>
   <a href="https://novarthacapital.com/" class="nav-logo">
-    <img src="https://novarthacapital.com/logo.png" alt="Novartha Capital"/>
+    <img src="./logo.png" alt="Novartha Capital"/>
     <div>
       <div class="nav-brand-name">Novartha Capital</div>
       <span class="nav-brand-tag">Financial Calculators</span>
@@ -371,13 +371,7 @@ input[type=range]::-moz-range-track{background:var(--paper2);height:5px;border-r
           <div class="slider-minmax"><span>0% (No step-up)</span><span>25% per year</span></div>
         </div>
         <div class="calc-breakdown" id="sip-breakdown"></div>
-        <div class="calc-cta">
-          <div class="calc-cta-text">
-            <strong>Want a personalised SIP plan?</strong>
-            <p>Ankit &amp; Arpita Mehta will design the perfect SIP strategy for your goals — free, no obligation.</p>
-          </div>
-          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20used%20the%20SIP%20calculator%20and%20want%20a%20personalised%20plan" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Get My Free SIP Plan</a>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -429,10 +423,7 @@ input[type=range]::-moz-range-track{background:var(--paper2);height:5px;border-r
           <div class="slider-minmax"><span>₹0</span><span>₹50 Lakh</span></div>
         </div>
         <div class="calc-breakdown" id="edu-breakdown"></div>
-        <div class="calc-cta">
-          <div class="calc-cta-text"><strong>Secure Your Child's Dreams</strong><p>Let Arpita Mehta create a personalised child education plan — free, no obligation.</p></div>
-          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20plan%20for%20my%20child%27s%20education" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan Child's Education</a>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -479,10 +470,7 @@ input[type=range]::-moz-range-track{background:var(--paper2);height:5px;border-r
           <div class="slider-minmax"><span>6%</span><span>20%</span></div>
         </div>
         <div class="calc-breakdown" id="wed-breakdown"></div>
-        <div class="calc-cta">
-          <div class="calc-cta-text"><strong>Plan Your Child's Big Day</strong><p>Ankit Mehta will help you build a dedicated wedding fund — starting small, growing big.</p></div>
-          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20plan%20for%20my%20child%27s%20wedding" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan Wedding Fund</a>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -529,10 +517,7 @@ input[type=range]::-moz-range-track{background:var(--paper2);height:5px;border-r
           <div class="slider-minmax"><span>6%</span><span>20%</span></div>
         </div>
         <div class="calc-breakdown" id="home-breakdown"></div>
-        <div class="calc-cta">
-          <div class="calc-cta-text"><strong>Plan Your Dream Home</strong><p>Get a personalised home purchase plan from Ankit Mehta — free, zero pressure.</p></div>
-          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20plan%20for%20my%20dream%20home" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan My Dream Home</a>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -579,10 +564,7 @@ input[type=range]::-moz-range-track{background:var(--paper2);height:5px;border-r
           <div class="slider-minmax"><span>10%</span><span>100% (Full amount)</span></div>
         </div>
         <div class="calc-breakdown" id="car-breakdown"></div>
-        <div class="calc-cta">
-          <div class="calc-cta-text"><strong>Drive Your Dream — Debt Free</strong><p>Let Ankit help you plan a dedicated car fund. You focus on driving, we handle the investing.</p></div>
-          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20save%20for%20my%20dream%20car" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan My Dream Car</a>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -624,10 +606,7 @@ input[type=range]::-moz-range-track{background:var(--paper2);height:5px;border-r
           <div class="slider-minmax"><span>6%</span><span>20%</span></div>
         </div>
         <div class="calc-breakdown" id="vac-breakdown"></div>
-        <div class="calc-cta">
-          <div class="calc-cta-text"><strong>Travel the World — Guilt Free</strong><p>Arpita will build you a dedicated travel fund alongside your main investment portfolio.</p></div>
-          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20plan%20a%20vacation%20fund" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan Vacation Fund</a>
-        </div>
+        
       </div>
     </div>
   </div>
@@ -689,10 +668,7 @@ input[type=range]::-moz-range-track{background:var(--paper2);height:5px;border-r
           <div class="slider-minmax"><span>₹0</span><span>₹2 Crore</span></div>
         </div>
         <div class="calc-breakdown" id="ret-breakdown"></div>
-        <div class="calc-cta">
-          <div class="calc-cta-text"><strong>Know Your Retirement Number</strong><p>Let Ankit &amp; Arpita build a complete retirement roadmap for your lifestyle and goals.</p></div>
-          <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20to%20plan%20for%20retirement%20with%20Novartha%20Capital" target="_blank" class="btn-cta-wa"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>Plan My Retirement</a>
-        </div>
+        
       </div>
     </div>
   </div>

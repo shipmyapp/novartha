@@ -72,7 +72,7 @@ a{text-decoration:none;color:inherit;}
 ═══════════════════════════════════════════════════ */
 nav{
   position:fixed;top:0;left:0;right:0;z-index:900;
-  height:72px;
+  height:94px;
   display:flex;align-items:center;justify-content:space-between;
   padding:0 6%;
   background:rgba(253,249,242,0.95);
@@ -83,10 +83,10 @@ nav{
 nav.scrolled{box-shadow:var(--shadow-md);}
 
 .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
-.nav-logo img{height:42px;width:42px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border2);}
+.nav-logo img{height:64px;width:64px;border-radius:50%;object-fit:cover;border:1.5px solid var(--border2);}
 .nav-brand-name{
   font-family:'Cormorant Garamond',serif;
-  font-size:1.18rem;font-weight:600;
+  font-size:1.8rem;font-weight:600;
   color:var(--forest);letter-spacing:0.3px;line-height:1;
 }
 .nav-brand-tag{
@@ -148,6 +148,12 @@ nav.scrolled{box-shadow:var(--shadow-md);}
 
 /* Nav actions */
 .nav-actions{display:flex;align-items:center;gap:10px;margin-left:14px;}
+.mobile-menu-btn {
+  display:none;
+  background:none; border:none; cursor:pointer; color:var(--forest);
+  padding:4px; margin-left:8px;
+}
+.mobile-menu-btn svg { width:28px; height:28px; stroke:currentColor; fill:none; stroke-width:2; }
 .btn-nav-wa{
   display:inline-flex;align-items:center;gap:8px;
   background:#25D366;color:var(--white);
@@ -475,15 +481,20 @@ nav.scrolled{box-shadow:var(--shadow-md);}
 .pain-pullquote{
   margin-top:48px;
   background:var(--paper);border-radius:12px;
-  padding:40px 48px;border:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;gap:32px;flex-wrap:wrap;
+  padding:48px 56px;border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;gap:48px;flex-wrap:wrap;
+}
+.pq-quotes-wrap {
+  display:flex;flex-direction:column;gap:24px;flex:1;
 }
 .pq-text{
   font-family:'Cormorant Garamond',serif;
-  font-size:1.45rem;color:var(--ink2);line-height:1.55;
-  font-style:italic;max-width:560px;
+  font-size:1.45rem;color:var(--ink);line-height:1.55;
+  font-style:italic;font-weight:600;max-width:700px;
 }
-.pq-text::before{content:'\201C';color:var(--brass);font-size:3.5rem;line-height:0;vertical-align:-0.55em;margin-right:4px;}
+.pq-text span {
+  color: var(--brass); font-weight: 500; font-style: normal; font-size: 1rem; display: block; margin-top: 4px; font-family: 'Jost', sans-serif;
+}
 
 /* ═══════════════════════════════════════════════════
    OFFERINGS  — reference nav: Offerings > Services + Products
@@ -565,7 +576,7 @@ nav.scrolled{box-shadow:var(--shadow-md);}
   background:radial-gradient(circle,rgba(215,181,109,0.12),transparent);
 }
 .tc-avatar{
-  width:76px;height:76px;border-radius:50%;
+  width:120px;height:120px;border-radius:50%;
   background:linear-gradient(135deg,var(--green2),var(--sage));
   display:flex;align-items:center;justify-content:center;
   font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:600;
@@ -728,8 +739,8 @@ footer{
   gap:44px;margin-bottom:48px;
 }
 .footer-logo-link{display:flex;align-items:center;gap:11px;text-decoration:none;margin-bottom:16px;}
-.footer-logo-link img{height:38px;width:38px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(215,181,109,0.3);}
-.footer-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold2);font-weight:600;}
+.footer-logo-link img{height:60px;width:60px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(215,181,109,0.3);}
+.footer-brand-name{font-family:'Cormorant Garamond',serif;font-size:1.65rem;color:var(--gold2);font-weight:600;}
 .footer-brand-sub{display:block;font-size:0.58rem;color:rgba(255,255,255,0.3);letter-spacing:2px;text-transform:uppercase;}
 .footer-about{color:rgba(255,255,255,0.42);font-size:0.855rem;line-height:1.75;max-width:270px;margin-bottom:20px;}
 .footer-contact{display:flex;align-items:center;gap:9px;color:rgba(255,255,255,0.5);font-size:0.84rem;margin-bottom:8px;}
@@ -778,7 +789,28 @@ footer{
   .footer-top{grid-template-columns:1fr 1fr;}
 }
 @media(max-width:768px){
-  .nav-menu,.nav-actions{display:none;}
+  .btn-nav-wa{display:none;}
+  .mobile-menu-btn{display:flex;align-items:center;justify-content:center;}
+  .nav-menu{
+    position:absolute; top:92px; left:0; right:0;
+    background:var(--ivory); flex-direction:column; align-items:flex-start;
+    padding:20px 6% 32px; border-bottom:1px solid var(--border);
+    box-shadow:var(--shadow-md); gap:0;
+    opacity:0; visibility:hidden; pointer-events:none;
+    transform:translateY(-10px); transition:all 0.3s ease;
+  }
+  .nav-menu.active{
+    opacity:1; visibility:visible; pointer-events:all; transform:translateY(0); display:flex;
+  }
+  .nav-item{ width:100%; border-bottom:1px solid var(--border); }
+  .nav-item:last-child{ border-bottom:none; }
+  .nav-link{ font-size:1.15rem; padding:16px 0; width:100%; justify-content:space-between; }
+  .nav-dropdown{
+    position:static; transform:none; opacity:1; visibility:visible; pointer-events:all;
+    box-shadow:none; border:none; border-left:2px solid var(--border2);
+    border-radius:0; min-width:auto; margin-left:14px; margin-bottom:16px;
+    padding:0 0 0 16px;
+  }
   .hero-h1{font-size:2.2rem;}
   .hero-stats{gap:20px;flex-wrap:wrap;}
   .hero-stats .hs-item{min-width:calc(50% - 10px);}
@@ -804,7 +836,7 @@ footer{
 <!-- ══ NAVIGATION ══ -->
 <nav id="mainNav">
   <a href="https://novarthacapital.com/" class="nav-logo">
-    <img src="https://novarthacapital.com/logo.png" alt="Novartha Capital"/>
+    <img src="./logo.png" alt="Novartha Capital"/>
     <div>
       <div class="nav-brand-name">Novartha Capital</div>
       <span class="nav-brand-tag">Nurturing Wealth, Harvesting Potential</span>
@@ -857,6 +889,9 @@ footer{
       <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
       Invest Now
     </a>
+    <button class="mobile-menu-btn" onclick="document.querySelector('.nav-menu').classList.toggle('active')" aria-label="Toggle Menu">
+      <svg viewBox="0 0 24 24"><path d="M4 12h16M4 6h16M4 18h16"/></svg>
+    </button>
   </div>
 </nav>
 
@@ -881,8 +916,8 @@ footer{
       </div>
       <div class="hero-stats">
         <div class="hs-item">
-          <div class="hs-num"><span class="count-num" data-count="50" data-suffix="Cr+">₹50Cr+</span></div>
-          <div class="hs-label">Assets Under Advisory</div>
+          <div class="hs-num"><span class="count-num" data-count="75" data-suffix="Cr+">₹75Cr+</span></div>
+          <div class="hs-label">Assets Under Management</div>
         </div>
         <div class="hs-item">
           <div class="hs-num"><span class="count-num" data-count="500" data-suffix="+">500+</span></div>
@@ -899,19 +934,57 @@ footer{
       </div>
     </div>
     <div class="hero-right">
-      <div class="hero-card-main">
-        <div class="hcm-tag">Free Download — Limited Time</div>
-        <div class="hcm-title">The ₹10,000 SIP Blueprint:<br/><em>Build ₹1 Crore Wealth</em></div>
-        <div class="hcm-list">
-          <div class="hcm-item"><div class="hcm-check">✓</div>Right funds for your income bracket</div>
-          <div class="hcm-item"><div class="hcm-check">✓</div>The compounding math that surprises most</div>
-          <div class="hcm-item"><div class="hcm-check">✓</div>5 silent mistakes killing your wealth</div>
-          <div class="hcm-item"><div class="hcm-check">✓</div>Complete 30-day action plan</div>
-        </div>
-        <a href="#lead-magnet" class="btn-gold" style="display:inline-flex;gap:8px;padding:12px 24px;font-size:0.88rem;">Get Free Guide →</a>
-      </div>
+      <style>
+        .hero-blueprint-img {
+          position: relative;
+          display: block;
+          border-radius: 16px;
+          box-shadow: var(--shadow-lg);
+          transition: transform 0.3s, box-shadow 0.3s;
+          overflow: hidden;
+        }
+        .hero-blueprint-img:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+        .hero-blueprint-img::before {
+          content: "";
+          position: absolute;
+          width: 80px; height: 80px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(255, 215, 0, 0.9) 10%, rgba(218, 165, 32, 0) 70%);
+          box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+          z-index: 2; pointer-events: none;
+          mix-blend-mode: color-dodge;
+          animation: float-coin 5s ease-in-out infinite alternate;
+        }
+        .hero-blueprint-img::after {
+          content: "";
+          position: absolute;
+          width: 60px; height: 60px;
+          border-radius: 50%;
+          background: radial-gradient(circle, rgba(255, 223, 0, 0.95) 10%, rgba(205, 133, 63, 0) 70%);
+          box-shadow: 0 0 15px rgba(255, 223, 0, 0.5);
+          z-index: 2; pointer-events: none;
+          mix-blend-mode: color-dodge;
+          animation: float-coin-2 6s ease-in-out infinite alternate-reverse;
+        }
+        @keyframes float-coin {
+          0% { top: 5%; left: 10%; transform: scale(0.9); opacity: 0.7; }
+          50% { top: 60%; left: 80%; transform: scale(1.3); opacity: 1; }
+          100% { top: 80%; left: 20%; transform: scale(0.8); opacity: 0.6; }
+        }
+        @keyframes float-coin-2 {
+          0% { bottom: 10%; right: 15%; transform: scale(0.8); opacity: 0.6; }
+          50% { bottom: 70%; right: 60%; transform: scale(1.2); opacity: 1; }
+          100% { bottom: 30%; right: 80%; transform: scale(1); opacity: 0.8; }
+        }
+      </style>
+      <a href="#lead-magnet" class="hero-blueprint-img">
+        <img src="./hero_image.jpg" alt="The ₹10,000 SIP Blueprint" style="width:100%; display:block; border-radius:16px;" />
+      </a>
       <div class="hero-mini-cards">
-        <div class="hmc"><div class="hmc-num">₹50Cr+</div><div class="hmc-label">Assets Under Advisory</div></div>
+        <div class="hmc"><div class="hmc-num">₹75Cr+</div><div class="hmc-label">Assets Under Management</div></div>
         <div class="hmc"><div class="hmc-num">500+</div><div class="hmc-label">Families Served</div></div>
         <div class="hmc"><div class="hmc-num">30+</div><div class="hmc-label">Yrs Experience</div></div>
       </div>
@@ -995,8 +1068,13 @@ footer{
       <div class="pain-card reveal d3"><div class="pain-emoji">😣</div><h4>"Others are growing. I'm standing still."</h4><p>Colleagues talking about returns while you feel left behind. You are one clear plan away from changing this completely.</p></div>
     </div>
     <div class="pain-pullquote reveal">
-      <div class="pq-text">The biggest financial mistake isn't a bad investment — it's waiting too long to make any investment at all.</div>
-      <a href="#lead-magnet" class="btn-primary">Get a Clear Plan Today →</a>
+      <div class="pq-quotes-wrap">
+        <div class="pq-text">"The biggest financial mistake isn't a bad investment — it's waiting too long to make any investment at all."</div>
+        <div class="pq-text">"Do not save what is left after spending, but spend what is left after saving." <span>— Warren Buffett</span></div>
+        <div class="pq-text">"Compound interest is the eighth wonder of the world. He who understands it, earns it; he who doesn't, pays it." <span>— Albert Einstein</span></div>
+        <div class="pq-text">"The best time to plant a tree was 20 years ago. The second best time is now." <span>— Chinese Proverb</span></div>
+      </div>
+      <a href="#lead-magnet" class="btn-primary" style="flex-shrink:0;">Get a Clear Plan Today →</a>
     </div>
   </div>
 </section>
@@ -1068,7 +1146,9 @@ footer{
     <div class="team-grid">
       <div class="team-card reveal">
         <div class="tc-header">
-          <div class="tc-avatar">AM</div>
+          <div class="tc-avatar" style="overflow: hidden;">
+            <img src="ankit.jpeg" alt="Ankit Mehta" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
           <div class="tc-name">Ankit Mehta</div>
           <div class="tc-role">Co-Founder &amp; Chief Investment Advisor</div>
         </div>
@@ -1085,7 +1165,9 @@ footer{
       </div>
       <div class="team-card reveal d2">
         <div class="tc-header" style="background:linear-gradient(135deg,#1f4a35,#2b6048);">
-          <div class="tc-avatar" style="background:linear-gradient(135deg,#2b6048,#5b9e7a);">AM</div>
+          <div class="tc-avatar" style="background:linear-gradient(135deg,#2b6048,#5b9e7a); overflow: hidden;">
+            <img src="arpita.jpeg" alt="Arpita Mehta" style="width: 100%; height: 100%; object-fit: cover;">
+          </div>
           <div class="tc-name">Arpita Mehta</div>
           <div class="tc-role">Co-Founder &amp; Head of Financial Planning</div>
         </div>
@@ -1177,16 +1259,12 @@ footer{
       <h2>Get a Personalised <em>Investment Plan — Free</em></h2>
       <p>No obligation. No pressure. Just an honest, expert roadmap built around your life — from Ankit &amp; Arpita who genuinely care about your outcome.</p>
       <div class="value-chips">
-        <div class="vc">Financial Goal Mapping</div>
-        <div class="vc">SIP Strategy Design</div>
-        <div class="vc">Retirement Roadmap</div>
-        <div class="vc">Risk Profile Analysis</div>
         <div class="vc">Free Consultation Call</div>
         <div class="vc">WhatsApp Support</div>
       </div>
       <a href="https://wa.me/919979232324?text=Hi%2C%20I%20want%20a%20free%20personalised%20investment%20plan%20from%20Novartha%20Capital" target="_blank" class="btn-wa">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.126.554 4.126 1.526 5.863L.057 23.5l5.805-1.522A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.011-1.376l-.36-.214-3.446.904.921-3.36-.234-.374A9.771 9.771 0 012.182 12C2.182 6.58 6.58 2.182 12 2.182S21.818 6.58 21.818 12 17.42 21.818 12 21.818z"/></svg>
-        Talk to Ankit or Arpita on WhatsApp
+        Talk to Ankit on WhatsApp
       </a>
       <p class="offer-note">🛡 No obligation. No pressure. No spam. Your information is safe with us.</p>
     </div>
@@ -1213,7 +1291,7 @@ footer{
     <div class="footer-top">
       <div>
         <a href="https://novarthacapital.com/" class="footer-logo-link">
-          <img src="https://novarthacapital.com/logo.png" alt="Novartha Capital"/>
+          <img src="./logo.png" alt="Novartha Capital"/>
           <div>
             <div class="footer-brand-name">Novartha Capital</div>
             <span class="footer-brand-sub">Nurturing Wealth, Harvesting Potential</span>
@@ -1377,6 +1455,9 @@ function smoothTo(selector,event){
 }
 document.querySelectorAll('a[href^="#"]').forEach(function(a){
   a.addEventListener('click',function(e){
+    var nm = document.querySelector('.nav-menu');
+    if(nm) nm.classList.remove('active');
+    
     var href=a.getAttribute('href');
     if(href==='#')return;
     var t=document.querySelector(href);
